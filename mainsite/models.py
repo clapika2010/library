@@ -13,6 +13,9 @@ class Ebook (models.Model):
 	comments=models.ManyToManyField(UserInfo,through='Comment')
 	uploader=models.ForeignKey(UserInfo)
 	
+	def get_absolute_url():
+		
+	
 class Category(models.Model):
 	name=models.CharField(max_length=100)
 	category_info=models.CharField(max_length=300)
@@ -27,6 +30,7 @@ class UserInfo(models.Model):
 	user=models.ForeignKey(User)
 	user_info=models.CharField(max_length=300)
 	download_list=models.ManyToManyField(Ebook,through='Download')
+User.profile = property(lambda u: PubProfile.objects.get_or_create(user=u)[0]) # (Tips)
 	
 
 class Download(models.Model):
