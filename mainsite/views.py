@@ -1,6 +1,7 @@
 # Create your views here.
 
 def home(request):
+	#index.html
 	pass
 	
 def category(request, name):
@@ -25,4 +26,5 @@ def search(request):
 	pass
 	
 def view(request, name):
+#	book.html
 	pass

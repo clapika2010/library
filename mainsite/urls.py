@@ -13,5 +13,5 @@ urlpatterns = patterns('',
 	url(r'^register$','library.mainsite.register'),
 	url(r'^upload','library.mainsite.upload'),
 	url(r'^search','library.mainsite.search'),
-	url(r'^view/(?P<ebook>\w+/$','library.mainsite.view'),
+	url(r'^view/(?P<ebook>\w+/)$','library.mainsite.view'),
 )
