@@ -50,9 +50,6 @@ class Rate(models.Model):
 	rate=models.IntegerField()
 	
 
-	
-	
-
 
 
 
