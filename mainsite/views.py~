@@ -24,5 +24,4 @@ def upload(request):
 def search(request):
 	pass
 	
-def view(request, name):
-	pass
+def view(request, )
