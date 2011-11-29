@@ -1,17 +1,17 @@
 from django.db import models
-from django.contrib.auth import User
+from django.contrib.auth.models import User
 import datetime
 # Create your models here.
 
 class Ebook (models.Model):
 	name=models.CharField(max_length=100)
-	review=models.TextField
+	review=models.TextField()
 	upload_time=models.DateField(default=datetime.date.today())
 	download_link=models.URLField()
-	rates=models.ManyToManyField(UserInfo,through='Rate')
-	category=models.ManyToManyField(Category,through='Level')
-	comments=models.ManyToManyField(UserInfo,through='Comment')
-	uploader=models.ForeignKey(UserInfo)
+	rates=models.ManyToManyField('UserInfo',through='Rate',related_name='ebook_rate')
+	category=models.ManyToManyField('Category',through='Level')
+	comments=models.ManyToManyField('UserInfo',through='Comment',related_name='ebook_comment')
+	uploader=models.ForeignKey('UserInfo',related_name='ebook_uploader')
 	slug=models.SlugField(unique=True)
 	
 	@models.permalink
@@ -72,8 +72,8 @@ class Rate(models.Model):
 	rate=models.IntegerField()
 	
 	
-class EbookAdmin(models.ModelAdmin):
-	prepopulated_fields={'slug':['name']}
+#class EbookAdmin(models.ModelAdmin):
+#	prepopulated_fields={'slug':['name']}
 
 
 

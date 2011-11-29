@@ -5,7 +5,7 @@ from django.conf.urls.defaults import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-	url(r'^$','library.mainsite.home'),
+	url(r'^$','library.mainsite.views.home'),
 	url(r'^category/(?P<cate>\w{20})/$','library.mainsite.category'),
 	url(r'^subject$/(?P<sub>\w{20})/$','library.mainsite.subject'),
 	url(r'^login$','library.mainsite.log_in'),
