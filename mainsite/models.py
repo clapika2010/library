@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib import admin
 from django.contrib.auth.models import User
 import datetime
 # Create your models here.
@@ -7,7 +8,7 @@ class Ebook (models.Model):
 	name=models.CharField(max_length=100)
 	review=models.TextField()
 	upload_time=models.DateField(default=datetime.date.today())
-	download_link=models.URLField()
+	publish_date=models.DateField()
 	rates=models.ManyToManyField('UserInfo',through='Rate',related_name='ebook_rate')
 	category=models.ManyToManyField('Category',through='Level')
 	comments=models.ManyToManyField('UserInfo',through='Comment',related_name='ebook_comment')
@@ -18,7 +19,10 @@ class Ebook (models.Model):
 	def get_absolute_url():
 		return ('library.mainsite.views.view',self.slug)
 		
-		
+class Link(models.Model):
+	download_link=models.URLField()
+	is_alive=models.BooleanField()
+	ebook=models.ForeignKey(Ebook)			
 	
 class Category(models.Model):
 	name=models.CharField(max_length=100)
@@ -71,9 +75,8 @@ class Rate(models.Model):
 	ebook=models.ForeignKey(Ebook)
 	rate=models.IntegerField()
 	
-	
-#class EbookAdmin(models.ModelAdmin):
-#	prepopulated_fields={'slug':['name']}
+class EbookAdmin(admin.ModelAdmin):
+	prepopulated_fields={'slug':['name']}
 
 
 
