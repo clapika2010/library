@@ -1,9 +1,17 @@
 # Create your views here.
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from library.mainsite.models import *  
+from library.mainsite.forms import *
+from django.shortcuts import render_to_response, redirect
+from django.template.context import RequestContext
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+from django.core.mail import send_mail, BadHeaderError
 
 def home(request):
-	return render_to_response('home.html', {'title': 'Home'}, context_instance=RequestContext(request))
+	return render_to_response('home.html',
+	{'title': 'Home'},
+	context_instance = RequestContext(request))
 	
 def category(request, name):
 	pass
