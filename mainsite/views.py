@@ -27,10 +27,26 @@ def register(request):
 	
 def log_out(request):
 	pass
-	
+
 def upload(request):
-	pass
+	if request.method == "POST":
+		form = UploadForm(request.POST)
+		if form.is_valid():
+			form.save()
+	else: 
+		form = UploadForm()			
+	return render_to_response("upload.html",{"form":form},context_instance=RequestContext(request))		
+			
 	
+def create(request):
+	if request.method == "POST":
+		form = EbookForm(request.POST)
+		if form.is_valid():
+			form.save()
+	else:
+		form = EbookForm()
+	return render_to_response("create.html",{"form":form},context_instance=RequestContext(request))
+			
 def search(request):
 	pass
 	

@@ -6,15 +6,18 @@ import datetime
 
 class Ebook (models.Model):
 	name=models.CharField(max_length=100)
-	review=models.TextField()
+	description=models.TextField()
 	upload_time=models.DateField(default=datetime.date.today())
 	publish_date=models.DateField()
 	rates=models.ManyToManyField('UserInfo',through='Rate',related_name='ebook_rate')
-	category=models.ManyToManyField('Category',through='Level')
+	category=models.ManyToManyField('Category',through='Level',null=True)
+	subject=models.ManyToManyField('Subject',null=True)
 	comments=models.ManyToManyField('UserInfo',through='Comment',related_name='ebook_comment')
 	uploader=models.ForeignKey('UserInfo',related_name='ebook_uploader')
 	slug=models.SlugField(unique=True)
-	
+	download_link=models.URLField()
+	image_link=models.URLField()
+	authors=models.CharField(max_length=200)
 	@models.permalink
 	def get_absolute_url():
 		return ('library.mainsite.views.view',self.slug)
