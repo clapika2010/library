@@ -1,0 +1,78 @@
+<! DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+	<head>
+		<title>{{ title }}</title>
+		<meta http-equiv="Content-Language" content="en" >
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+		<meta name="description" content="Online library for HCMUT" >
+		<meta name="keywords" content="Books, HCMUT" >
+		<link rel="stylesheet" type="text/css" href="/static/css/style.css" >
+	</head>
+	<body>	
+			<div class="header">
+				<div class="row_1">
+					<div id="wrapper">
+						<ul>
+							<li>About Us</li>
+							<li>FAQS</li>
+							<li>Contacts</li>
+						</ul>
+					</div><!-- END wrapper -->
+				</div><!-- END row_1 -->
+				<div class="row_2">
+					<div id="wrapper">
+						<div class="logo"></div><!-- END logo -->
+						<div class="search_area">
+							<div class="search">
+								<form action="" method="">
+									<input type="text" class="inputbox" maxlength="80" value="Enter search keywords here" />
+									<input type="submit" class="button" value="" />
+								</form>
+							</div><!-- END search -->
+						</div><!-- END search -->
+					</div><!-- END wrapper -->
+				</div><!-- END row_2 -->
+					<div class="row_3">
+						<div id="wrapper">
+							<ul>
+								<li><a href="">HOME</a></li>
+								<li><a href="">CATEGORIES</a></li>
+								<li><a href="">SUBJECTS</a></li>
+								<li><a href="">UPLOAD</a></li>
+							</ul>
+						</div><!-- END wrapper -->
+					</div><!-- END row_3 -->
+				</div><!-- END wrapper -->	
+			</div><!-- END header -->
+			
+			<div id = "content">
+			{% block content %}
+			
+			
+			{% endblock %}
+			</div>
+			
+			<div class="footer">
+				<div id="wrapper">
+					<div class="content">
+						<div class="left">
+							<ul>
+								<li>About Us</li>
+								<li>FAQS</li>
+								<li>Contacts</li>
+							</ul>
+							<p>Copyright © 2011 Books. All Rights Reserved.</p>
+						</div><!-- END left -->
+						<div class="right">
+							<ul>
+								<li><img src="/static/images/social1.png" alt="facebook"/></li>
+								<li><img src="/static/images/social2.png" alt="facebook"/></li>
+								<li><img src="/static/images/social3.png" alt="facebook"/></li>
+							</ul>
+						</div><!-- END right -->
+					</div><!-- END content -->
+				</div><!-- END wrapper -->
+			</div><!-- END footer -->
+		</div>
+</html>

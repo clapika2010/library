@@ -1,24 +1,31 @@
 from django.db import models
-from django.contrib.auth import User
+from django.contrib import admin
+from django.contrib.auth.models import User
 import datetime
 # Create your models here.
 
 class Ebook (models.Model):
 	name=models.CharField(max_length=100)
-	review=models.TextField
+	description=models.TextField()
 	upload_time=models.DateField(default=datetime.date.today())
-	download_link=models.URLField()
-	rates=models.ManyToManyField(UserInfo,through='Rate')
-	category=models.ManyToManyField(Category,through='Level')
-	comments=models.ManyToManyField(UserInfo,through='Comment')
-	uploader=models.ForeignKey(UserInfo)
+	publish_date=models.DateField()
+	rates=models.ManyToManyField('UserInfo',through='Rate',related_name='ebook_rate')
+	category=models.ManyToManyField('Category',through='Level',null=True)
+	subject=models.ManyToManyField('Subject',null=True)
+	comments=models.ManyToManyField('UserInfo',through='Comment',related_name='ebook_comment')
+	uploader=models.ForeignKey('UserInfo',related_name='ebook_uploader')
 	slug=models.SlugField(unique=True)
-	
+	download_link=models.URLField()
+	image_link=models.URLField()
+	authors=models.CharField(max_length=200)
 	@models.permalink
 	def get_absolute_url():
 		return ('library.mainsite.views.view',self.slug)
 		
-		
+class Link(models.Model):
+	download_link=models.URLField()
+	is_alive=models.BooleanField()
+	ebook=models.ForeignKey(Ebook)			
 	
 class Category(models.Model):
 	name=models.CharField(max_length=100)
@@ -71,8 +78,7 @@ class Rate(models.Model):
 	ebook=models.ForeignKey(Ebook)
 	rate=models.IntegerField()
 	
-	
-class EbookAdmin(models.ModelAdmin):
+class EbookAdmin(admin.ModelAdmin):
 	prepopulated_fields={'slug':['name']}
 
 
