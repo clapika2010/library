@@ -8,6 +8,9 @@
 		<meta name="description" content="Online library for HCMUT" >
 		<meta name="keywords" content="Books, HCMUT" >
 		<link rel="stylesheet" type="text/css" href="/static/css/style.css" >
+		<script type="text/javascript" src="/static/scripts/search.js">
+			
+		</script>
 	</head>
 	<body>	
 			<div class="header">
@@ -25,9 +28,9 @@
 						<div class="logo"></div><!-- END logo -->
 						<div class="search_area">
 							<div class="search">
-								<form action="" method="">
-									<input type="text" class="inputbox" maxlength="80" value="Enter search keywords here" />
-									<input type="submit" class="button" value="" />
+								<form action="/search" method="GET">
+									<input type="text" name="searchTxt" class="inputbox" maxlength="80" value="Enter search keywords here" />
+									<input type="submit" class="button" value="" onclick="preCheckSearch(this.form)"/>
 								</form>
 							</div><!-- END search -->
 						</div><!-- END search -->

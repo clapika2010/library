@@ -7,6 +7,8 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail, BadHeaderError
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from itertools import chain
 
 def home(request):
 	return render_to_response('home.html',
@@ -48,8 +50,30 @@ def create(request):
 	return render_to_response("create.html",{"form":form},context_instance=RequestContext(request))
 			
 def search(request):
-	pass
+	results_per_page = 4
+	try:
+		searchKey = request.GET['searchTxt']
+		request.session['searchKey'] = searchKey
+	except KeyError:
+		searchKey = request.session['searchKey']
+	try:
+		page = request.GET['page']
+	except KeyError:
+		page = 1
 	
+	cate = Category.objects.filter(name__contains = searchKey)
+	sub = Subject.objects.filter(name__contains = searchKey)
+	eb = Ebook.objects.filter(name__contains = searchKey)
+	result_list = list(chain(cate,sub,eb))
+	paginator = Paginator(result_list,results_per_page)
+	
+	try:
+		searchResults = paginator.page(page)
+	except PageNotAnInteger:
+		searchResults = paginator.page(1)
+	except EmptyPage:
+		searchResults = paginator.page(paginator.num_pages)
+	return render_to_response('searchResult.html', {"searchResults": searchResults},context_instance=RequestContext(request))
 def view(request, name):
 #	book.html
 	pass

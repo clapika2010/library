@@ -21,7 +21,9 @@ class Ebook (models.Model):
 	@models.permalink
 	def get_absolute_url():
 		return ('library.mainsite.views.view',self.slug)
-		
+	def get_model_name(self):
+		return self.__class__.__name__ 
+	
 class Link(models.Model):
 	download_link=models.URLField()
 	is_alive=models.BooleanField()
@@ -39,7 +41,9 @@ class Category(models.Model):
 	@models.permalink
 	def get_absolute_url():
 		return ('library.mainsite.views.category',self.slug)
-	
+	def get_model_name(self):
+		return self.__class__.__name__ 
+		
 class Subject(models.Model):
 	name=models.CharField(max_length=100,primary_key=True)
 	subject_info=models.CharField(max_length=300)
@@ -49,6 +53,8 @@ class Subject(models.Model):
 	@models.permalink
 	def get_absolute_url():
 		return ('library.mainsite.views.subject',self.slug)
+	def get_model_name(self):
+		return self.__class__.__name__ 
 	
 class UserInfo(models.Model):
 	user=models.ForeignKey(User)
