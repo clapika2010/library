@@ -8,7 +8,7 @@ class Ebook (models.Model):
 	name=models.CharField(max_length=100)
 	description=models.TextField()
 	upload_time=models.DateField(default=datetime.date.today())
-	publish_date=models.DateField()
+	published_date=models.DateField()
 	rates=models.ManyToManyField('UserInfo',through='Rate',related_name='ebook_rate')
 	category=models.ManyToManyField('Category',through='Level',null=True)
 	subject=models.ManyToManyField('Subject',null=True)
@@ -79,6 +79,7 @@ class Rate(models.Model):
 	rate=models.IntegerField()
 	
 class EbookAdmin(admin.ModelAdmin):
+	exclude=('slug',)
 	prepopulated_fields={'slug':['name']}
 
 

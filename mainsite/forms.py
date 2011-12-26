@@ -11,6 +11,8 @@ class EbookForm(ModelForm):
 class UploadForm(ModelForm):
 	class Meta:
 		model=Ebook
-		fields=('name','description','category','subject')
-	
-	
+		fields=('name','description','category','subject','published_date','authors')
+	def __init__(self, *args, **kwargs):
+		super(UploadForm, self).__init__(*args, **kwargs)
+		self.fields['published_date'].widget=HiddenInput()
+		self.fields['authors'].widget=HiddenInput()
