@@ -3,8 +3,8 @@
     <title>Books API Example</title>
 	<script src="http://code.jquery.com/jquery-latest.pack.js"></script>
 		<script>
-		var container=document.getElementById("container")
   function doAjax(url){
+  var container = $('#id_description');
     if(url.match('^http')){
       $.getJSON("http://query.yahooapis.com/v1/public/yql?"+
                 "q=select%20*%20from%20html%20where%20url%3D%22"+
@@ -13,10 +13,10 @@
         function(data){
           if(data.results[0]){
             var data = filterData(data.results[0]);
-            container.html(data);
+            container.val(data);
           } else {
             var errormsg = '<p>Error: could not load the page.</p>';
-            container.html(errormsg);
+            container.val(errormsg);
           }
         }
       );
@@ -25,14 +25,14 @@
     }
   }
   function filterData(data){
-    data = data.replace(/<?\/body[^>]*>/g,'');
-    data = data.replace(/[\r|\n]+/g,'');
-    data = data.replace(/<--[\S\s]*?-->/g,'');
-    data = data.replace(/<noscript[^>]*>[\S\s]*?<\/noscript>/g,'');
-    data = data.replace(/<script[^>]*>[\S\s]*?<\/script>/g,'');
-    data = data.replace(/<script.*\/>/,'');
-    return data;
-  }
+var len="<div class=\"sa\" dir=\"ltr\" id=\"synopsistext\">".length;
+var index=data.indexOf("<div class=\"sa\" dir=\"ltr\" id=\"synopsistext\">");
+var temp=data.substring(index+len);
+var index2=temp.indexOf("<p>");
+var index3=temp.indexOf("\</p>");
+var string=temp.substring(index2+3,index3);
+return string;
+}
 </script>
   </head>
   <body>
@@ -61,12 +61,12 @@
 		formObject.elements["id_authors"].value = authors;
 		var published_date = input.volumeInfo.publishedDate;
 		formObject.elements["id_published_date"].value = published_date;
-		doAjax(input.volumeInfo.infoLink)
-		formObject.elements["id_description"].value = ;
+		doAjax(input.volumeInfo.infoLink);
 		var image_link = input.volumeInfo.imageLinks.thumbnail; 
 		formObject.elements["id_image_link"].value = image_link;
 	}
 	function handleResponse(response) {
+	$("#list").height("350px");
 	JSONObject = response;
 	document.getElementById("list").innerHTML="";
       for (var i = 0; i < response.items.length; i++) {
@@ -78,7 +78,9 @@
 	<h3>Start typing a name in the input field below:</h3>
 	Book name: <input type="text" name="bookName" id="bookName"/>
 	<input type="button" value="Search" onclick="GetInfo(document.getElementById('bookName').value)"/>
-	<p>Suggestions: <span id="list"></span></p>
+	<p>Suggestions:</p> 
+	<div id="list" style="overflow-y:scroll"></div>
+	<p></p>
 	<form id="result" action="/upload" method="post"> 
 	<table>
 		{{form.as_table}}
