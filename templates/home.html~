@@ -35,7 +35,6 @@
 			</div><!-- end right -->
 			<div class="left">
 				<h3><em>New </em>books</h3>
-				<!-- ####Moi loai co 1 hang sach, chinh no, boxIdent#### !-->
 				<div class="boxIdent">
 					<div class="books">
 						<img src="/static/images/demo.png" alt="" />

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="detail">
+	<div class="wrapper">
+		<div class="product_border">
+			<div class="product_wrapper">
+			</div><!-- end wrapper -->
+		</div><!-- end border -->
+	</div><!-- end wrapper -->
+</div><!-- end detail -->
+
+{% endblock %}

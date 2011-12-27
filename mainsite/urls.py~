@@ -7,7 +7,7 @@ from django.conf.urls.defaults import patterns, include, url
 urlpatterns = patterns('',
 	url(r'^$','library.mainsite.views.home'),
 	url(r'^information$', 'library.mainsite.views.information'),
-	url(r'^category$','library.mainsite.views.category'),
+	url(r'^category/(?P<cate>\w{20})/$','library.mainsite.views.category'),
 	url(r'^subject$/(?P<sub>\w{20})/$','library.mainsite.views.subject'),
 	url(r'^login$','library.mainsite.views.log_in'),
 	url(r'^logout$','library.mainsite.views.log_out'),

@@ -488,11 +488,5 @@ body {
 		width: 134px;
 		padding-left: 20px;
 		}
-		
-	.product_list .browse_1 .separator .floatElementR .browseAddToCartContainer {
-		width: 100%;
-		overflow: hidden;
-		text-align: left;
-		}
 				
 				

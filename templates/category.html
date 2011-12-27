@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="detail">
+	<div id="wrapper">
+		<div id="right"></div><!-- end right -->
+		<div id="left">
+			<h3>Books</h3>
+			<div class="orderby_form">
+				<form>
+					"Sort by: "
+					<select class="inputbox">
+						<option value="product_list">Select</option>
+						<option value="product_name">Product Name</option>
+					</select>
+				</form>
+			</div><!-- end orderby_form -->
+			<div class="product_list">
+				<div class="odd">
+					<div class="browse_1">
+						<div class="separator">	
+							<div class="floatElementR">
+								<div class="browseAddToCartContainer">
+									<div class="Download"><p>Download</p></div>
+								</div>
+							</div><!-- end elementR -->
+						</div><!-- end separator -->
+					</div><!-- end browse -->
+				</div>< !-- end odd -->
+			</div><!-- end product_list -->
+		</div><!-- end left -->
+	</div><!-- end wrapper -->
+</div><!-- end detail -->
+
+{% endblock %}
