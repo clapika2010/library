@@ -7,24 +7,30 @@
 			<ul class="bookshelf">
 				<!-- ####Cho nay la sach cho ke sach phia tren#### -->
 				<li>
+					{% if book_list %}
+						{% for book in book_list %}
 					<!-- ####for each moi cuon sach trong thu vien, thay hinh no trong cai link o img duoi day#### -->
 					<div class="row_product">
 						<div class="shadow">
-							<img src="/static/images/demo.png" alt="name" />
+							<img src={{ book.image_link }} alt={{ book.name }} />
 						</div><!-- end shadow -->
 					</div><!-- end row_product -->
-					<div class="row_product">
-						<div class="shadow">
-							<img src="/static/images/demo.png" alt="name" />
-						</div><!-- end shadow -->
-					</div><!-- end row_product -->
+							{% if(book_list.index(book)==5) %}
+								{{ break }}
+							{% endif %}
+						{% endfor %}
+					{% endif %}
 				</li>
 				<li>
+					{% if book_list %}
+						{% for book in book_list %}
 					<div class="row_product">
 						<div class="shadow">
 							<img src="/static/images/demo.png" alt="name" />
 						</div><!-- end shadow -->
 					</div><!-- end row_product -->
+						{% endfor %}
+					{% endif %}
 				</li>
 			</ul>
 		</div><!-- end wrapper -->
@@ -35,6 +41,7 @@
 			</div><!-- end right -->
 			<div class="left">
 				<h3><em>New </em>books</h3>
+				<!-- ####Moi loai co 1 hang sach, chinh no, boxIdent#### !-->
 				<div class="boxIdent">
 					<div class="books">
 						<img src="/static/images/demo.png" alt="" />

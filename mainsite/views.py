@@ -11,8 +11,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from itertools import chain
 
 def home(request):
+	book_list = Ebook.objects.all()
 	return render_to_response('home.html',
-	{'title': 'Home'},
+	{'book_list' : book_list, 'title' : 'Home'},
 	context_instance = RequestContext(request))
 
 def information(request):

@@ -3,8 +3,8 @@
 
 <div class="detail">
 	<div id="wrapper">
-		<div id="right"></div><!-- end right -->
-		<div id="left">
+		<div class="right"></div><!-- end right -->
+		<div class="left">
 			<h3>Books</h3>
 			<div class="orderby_form">
 				<form>
@@ -21,12 +21,28 @@
 						<div class="separator">	
 							<div class="floatElementR">
 								<div class="browseAddToCartContainer">
-									<div class="Download"><p>Download</p></div>
+									<div class="button"><p>Download</p></div>
 								</div>
 							</div><!-- end elementR -->
+							<div class="productImg">
+								<img class="star" src="/static/images/demo.png" alt="name" />
+							</div><!-- end productImg -->
+							<div class="floatElement">
+								<h2 class="title">Book name</h2>
+								<div class="description">comment</div><!-- end description -->
+								<div class="rating">
+									<img src="/static/images/star.png" alt="" />
+									<strong>Total votes: 0</strong>			
+								</div><!-- end rating -->
+								<div class="detail">
+									<a href="" class="details">Book details</a>
+								</div><!-- end detail -->
+							</div><!-- end floatElement -->
 						</div><!-- end separator -->
 					</div><!-- end browse -->
-				</div>< !-- end odd -->
+				</div><!-- end odd -->
+				<div class="even">
+				</div><!-- end even -->
 			</div><!-- end product_list -->
 		</div><!-- end left -->
 	</div><!-- end wrapper -->
