@@ -1,0 +1,36 @@
+<html>
+<body>
+	<table>
+	<h3>Category</h3>
+		<table border ="1">
+			<tr>
+				<th>Type</th>
+				<th>Name</th>
+				<th>Slug</th>
+			</tr>
+			{% for searchResult in searchResults.object_list %}
+			<tr>
+				<td>{{searchResult.get_model_name}}</td>
+				<td>{{searchResult.name}}</td>
+				<td><a>{{searchResult.slug}}</a></td>
+			</tr>
+			{% endfor %}
+		</table>
+		<div class="pagination">
+			<span class="step-links">
+				{% if searchResults.has_previous %}
+					<a href="?page={{ searchResults.previous_page_number }}">previous</a>
+				{% endif %}
+
+				<span class="current">
+					Page {{ searchResults.number }} of {{ searchResults.paginator.num_pages }}.
+				</span>
+
+				{% if searchResults.has_next %}
+					<a href="?page={{ searchResults.next_page_number }}">next</a>
+				{% endif %}
+			</span>
+		</div>
+	</table>
+</body>
+</html>
