@@ -15,6 +15,9 @@
 							<img src={{ book.image_link }} alt={{ book.name }} />
 						</div><!-- end shadow -->
 					</div><!-- end row_product -->
+							{% if(book_list.index(book)==5) %}
+								{{ break }}
+							{% endif %}
 						{% endfor %}
 					{% endif %}
 				</li>

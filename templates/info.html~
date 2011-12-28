@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="detail">
+	<div id="wrapper">
+		<div class="right"></div><!-- end right -->
+		<div class="left">
+			<div class="product_border">
+				<div class="product_wrapper">
+					<div class="float_left">
+						<div class="browseImg">
+							<div class="showImg"><img src="/static/images/demo.png" alt="" /></div>
+						</div><!-- end browseImg -->
+					</div><!-- end float -->	
+					<div class="float_element">
+						<h2 class="title">My book</h2><!-- name here -->
+						<div class="description">Day la cuon sach ve mot con cho</div><!-- mo ta sach o day -->
+						<div class="question">Ask a question about this book?</div><!-- have question to uploader? -->
+						<div class="download">Download</div>
+					</div><!-- end float_element -->
+				</div><!-- end wrapper -->
+			</div><!-- end border -->
+		</div><!-- end left -->
+	</div><!-- end wrapper -->
+</div><!-- end detail -->
+
+{% endblock %}

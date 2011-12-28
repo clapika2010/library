@@ -589,6 +589,7 @@ body {
 
 	.product_list .browse_1 .separator .floatElement .detail {
 		height: 16px;
+		width: 100px;
 		padding: 0;
 		margin: 0;
 		background: url('/static/images/DetailsContainer-bg.gif') left top no-repeat;

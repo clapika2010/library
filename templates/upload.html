@@ -1,7 +1,39 @@
 <html>	
   <head>
     <title>Books API Example</title>
-	<!-- <script src="jquery-1.7.1.js" type="text/javascript"></script> -->
+	<script src="http://code.jquery.com/jquery-latest.pack.js"></script>
+		<script>
+  function doAjax(url){
+  var container = $('#id_description');
+    if(url.match('^http')){
+      $.getJSON("http://query.yahooapis.com/v1/public/yql?"+
+                "q=select%20*%20from%20html%20where%20url%3D%22"+
+                encodeURIComponent(url)+
+                "%22&format=xml'&callback=?",
+        function(data){
+          if(data.results[0]){
+            var data = filterData(data.results[0]);
+            container.val(data);
+          } else {
+            var errormsg = '<p>Error: could not load the page.</p>';
+            container.val(errormsg);
+          }
+        }
+      );
+    } else {
+      $('#target').load(url);
+    }
+  }
+  function filterData(data){
+var len="<div class=\"sa\" dir=\"ltr\" id=\"synopsistext\">".length;
+var index=data.indexOf("<div class=\"sa\" dir=\"ltr\" id=\"synopsistext\">");
+var temp=data.substring(index+len);
+var index2=temp.indexOf("<p>");
+var index3=temp.indexOf("\</p>");
+var string=temp.substring(index2+3,index3);
+return string;
+}
+</script>
   </head>
   <body>
     <div id="content"></div>
@@ -26,20 +58,17 @@
 		var title = input.volumeInfo.title;
 		formObject.elements["id_name"].value = title;
 		var authors = input.volumeInfo.authors;
-		formObject.elements['description'].value=input.volumeInfo.description;
 		formObject.elements["id_authors"].value = authors;
 		var published_date = input.volumeInfo.publishedDate;
-		formObject.elements["id_published_date"].value = authors;
-		var description = input.volumeInfo.description;
-		formObject.elements["id_description"].value = description;
+		formObject.elements["id_published_date"].value = published_date;
+		doAjax(input.volumeInfo.infoLink);
 		var image_link = input.volumeInfo.imageLinks.thumbnail; 
-		alert(image_link)
 		formObject.elements["id_image_link"].value = image_link;
 	}
 	function handleResponse(response) {
+	$("#list").height("350px");
 	JSONObject = response;
 	document.getElementById("list").innerHTML="";
-	//document.getElementById("Hint").innerHTML= "create new book " + "<a href="/upload/new/">click</a>";
       for (var i = 0; i < response.items.length; i++) {
         var item = response.items[i];
         document.getElementById("list").innerHTML += "<br>" + "<input type=\"radio\" name=\"books\" onclick=\"parseInfo()\" id=\""+i+"\"><img src=\""+item.volumeInfo.imageLinks.smallThumbnail+"\">"+item.volumeInfo.title+"</input>";
@@ -49,7 +78,9 @@
 	<h3>Start typing a name in the input field below:</h3>
 	Book name: <input type="text" name="bookName" id="bookName"/>
 	<input type="button" value="Search" onclick="GetInfo(document.getElementById('bookName').value)"/>
-	<p>Suggestions: <span id="list"></span></p>
+	<p>Suggestions:</p> 
+	<div id="list" style="overflow-y:scroll"></div>
+	<p></p>
 	<form id="result" action="/upload" method="post"> 
 	<table>
 		{{form.as_table}}
@@ -57,5 +88,6 @@
 	<input type="submit" value="Upload" />
 	</form>
 	<a href="/create">Create Book Information yourself</a>
+	<div id="container"></div>
   </body>
 </html>
