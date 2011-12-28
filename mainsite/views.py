@@ -12,8 +12,23 @@ from itertools import chain
 
 def home(request):
 	book_list = Ebook.objects.all()
+	# sach cho ke sach, moi hang 5 cuon, sach moi up len, demo nen dung 2
+	book_row_1 = list(book_list.order_by('upload_time'))[0:2]
+	book_row_2 = list(book_list.order_by('upload_time'))[2:4]
+
+	# sach cho top download
+	# TODO: tinh ra book_top la list 5 sach so lan tai nhieu nhat
+	book_top = list()
+
+	# mybook bac nao lam csdl lam cho le
+	# TODO: book_my la list 5 sach cua thang dang dang nhap
+	book_my = list()
+
 	return render_to_response('home.html',
-	{'book_list' : book_list, 'title' : 'Home'},
+	{'title' : 'Home',
+	 'book_row_1' : book_row_1, 'book_row_2' : book_row_2,
+	 'book_top' : book_top,
+	 'book_my' : book_my },
 	context_instance = RequestContext(request))
 
 def information(request):
