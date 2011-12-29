@@ -8,9 +8,9 @@
 		<meta name="description" content="Online library for HCMUT" >
 		<meta name="keywords" content="Books, HCMUT" >
 		<link rel="stylesheet" type="text/css" href="/static/css/style.css" >
-		<script type="text/javascript" src="/static/scripts/search.js">	
-		</script>
-		<script type="text/javascript" src="/static/scripts/dropdown.js"></script>
+		<script type="text/javascript" src="/static/scripts/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" src="/static/scripts/search.js"></script>
+		<script type="text/javascript" src="/static/scripts/ddsmoothmenu.js"></script>
 	</head>
 	<body>	
 			<div class="header">
@@ -36,29 +36,61 @@
 						</div><!-- END search -->
 					</div><!-- END wrapper -->
 				</div><!-- END row_2 -->
-					<div class="row_3">
+				<div class="row_3">
+					<div class="moduletable-categories">
 						<div id="wrapper">
-							<ul>
-								<li><dl class="dropdown">
-  									<dt id="one-ddheader" onmouseover="ddMenu('one',1)" onmouseout="ddMenu('one',-1)">HOME</dt>
-  									<dd id="one-ddcontent" onmouseover="cancelHide('one')" onmouseout="ddMenu('one',-1)">
-    								<ul>
-      								<li class="dropdown"><a href="#" class="underline">Navigation Item 1</a></li>
-      								<li class="dropdown"><a href="#" class="underline">Navigation Item 2</a></li>
-      								<li class="dropdown"><a href="#" class="underline">Navigation Item 3</a></li>
-      								<li class="dropdown"><a href="#" class="underline">Navigation Item 4</a></li>
-      								<li class="dropdown"><a href="#">Navigation Item 5</a></li>
-
-    								</ul>
-  									</dd>
-								</dl></li>
-								<li><a href="">CATEGORIES</a></li>
-								<li><a href="">SUBJECTS</a></li>
-								<li><a href="">UPLOAD</a></li>
+						<div class="ddsmoothmenu" id="smoothmenu1">
+							<ul class="level1">
+								<li class="level1 item1"><a class="level1 item1" href="">HOME</a></li>
+								<li class="level1 item2"><a class="level1 item2" href="">CATEGORIES</a></li>
+								<li class="level1 item3 parent" style="z-index: 100;">
+									<a class="level1 item3 parent" href="">
+									<span>SUBJECTS</span>
+									</a>
+									<ul class="level2" style="top:42px;left:0px;width:193px;display:none;visibility:visible;">
+										<li class="level2 item1 parent" style="z-index:99;">
+											<a class="level2 item1 parent" href="">1ST-YEAR</a>
+											<ul class="level3" style="top:0px;display:none;visibility:visible;">
+												<li class="level3 item1"><a class="level3 item1" href="" >Semester 1</a></li>
+												<li class="level3 item2"><a class="level3 item2" href="" >Semester 2</a></li>
+											</ul>
+										</li>
+										<li class="level2 item1 parent" style="z-index:99;">
+											<a class="level2 item1 parent" href="">2ND-YEAR</a>
+											<ul class="level3" style="top:0px;display:none;visibility:visible;">
+												<li class="level3 item1"><a class="level3 item1" href="" >Semester 1</a></li>
+												<li class="level3 item2"><a class="level3 item2" href="" >Semester 2</a></li>
+											</ul>
+										</li>
+										<li class="level2 item1 parent" style="z-index:99;">
+											<a class="level2 item1 parent" href="">3RD-YEAR</a>
+											<ul class="level3" style="top:0px;display:none;visibility:visible;">
+												<li class="level3 item1"><a class="level3 item1" href="" >Semester 1</a></li>
+												<li class="level3 item2"><a class="level3 item2" href="" >Semester 2</a></li>
+											</ul>
+										</li>
+										<li class="level2 item1 parent" style="z-index:99;">
+											<a class="level2 item1 parent" href="">4TH-YEAR</a>
+											<ul class="level3" style="top:0px;display:none;visibility:visible;">
+												<li class="level3 item1"><a class="level3 item1" href="" >Semester 1</a></li>
+												<li class="level3 item2"><a class="level3 item2" href="" >Semester 2</a></li>
+											</ul>
+										</li>
+										<li class="level2 item1 parent" style="z-index:99;">
+											<a class="level2 item1 parent" href="">OTHER-YEAR</a>
+											<ul class="level3" style="top:0px;display:none;visibility:visible;">
+												<li class="level3 item1"><a class="level3 item1" href="" >Semester 1</a></li>
+												<li class="level3 item2"><a class="level3 item2" href="" >Semester 2</a></li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li class="level1 item4"><a class="level1 item4" href="">UPLOAD</a></li>
 							</ul>
 						</div><!-- END wrapper -->
-					</div><!-- END row_3 -->
-				</div><!-- END wrapper -->	
+						</div><!-- menu -->
+					</div><!-- END categories -->
+				</div><!-- end row_3 -->
 			</div><!-- END header -->
 			
 			{% block content %}

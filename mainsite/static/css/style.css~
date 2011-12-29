@@ -92,47 +92,59 @@ body {
 			}
 			
 	/*----------- row_3 ------------*/
-	.header .row_3 {
-		padding: 0px;
-		height: 40px;
-		width: 100%;
-		background: url('/static/images/header-bg-bot.jpg') left top repeat-x;
+/* ---------------------- categories --- */
+.header .row_3 {
+	float: top;
+	height: 50px;
+	width: 100%;
+	background: url('/static/images/header-bg-bot.jpg') bottom repeat-x;
 	}
+.moduletable-categories { border:none; background:url('/static/images/cat-divider.gif') left top no-repeat; height:42px; width:100%; position:absolute; top:120px; left:-1px; z-index:100;}
 	
-		.header  .row_3 ul {
-			padding: 0px;
-			margin: 0px;
-			height: 100%;
-			width: 100%;
-		}
-		
-		.header  .row_3 li {
-			float: left;
-			height: 30px;
-			padding: 10px 30px 0px 30px;
-			font: bold 16px Arial;
-			background: url('/static/images/cat-divider.gif') right center repeat-y;
-		}
-		
-		.header  .row_3 a {
-			text-decoration: none;
-			color: #600000;
-		}
+.rightarrowclass { display:none !important;}
+.ddsmoothmenu { background:none !important; padding:0px 0 0 0px;}
+
+.downarrowclass  { display:none; width:7px; height:4px; position:absolute; right:19px; top:19px;}
+.moduletable-categories ul.level1 li a:hover .downarrowclass , .moduletable-categories ul.level1 li a.active .downarrowclass , .moduletable-categories ul.level1 li a.selected .downarrowclass { display:block;} 
+
+.moduletable-categories ul.level1 { list-style:none; margin:0; padding:0 0 0 1px;}
+.moduletable-categories ul.level1 li { background:url('static/images/cat-divider.gif') right top no-repeat;  z-index:98; font:bold 16px/25px Arial, Helvetica, sans-serif; float:left; letter-spacing:0px;  border:none; position:relative;text-transform:uppercase;}
+.moduletable-categories ul.level1 li a  { text-decoration:none; margin-right:0px; padding:8px 20px 9px 18px; color:#6f422b; display:inline-block; background:none; border:none; border-left:none;}
+.moduletable-categories ul.level1 li a.parent { padding-right:38px !important; margin-bottom:0px;}
+.moduletable-categories ul.level1 li a:hover , .moduletable-categories ul.level1 li a.active , .moduletable-categories ul.level1 li a.selected  {background:url('static/images/cat-a.active.jpg'); color:#fff; margin-right:2px; padding-right:18px;}
+.moduletable-categories ul.level1 li a.parent:hover , .moduletable-categories ul.level1 li a.parent.active , .moduletable-categories ul.level1 li a.parent.selected  { margin-right:2px; padding-right:36px!important;}
 
 
-/*---------------------------drop down --------------------------*/
+.moduletable-categories ul.level2 li a.parent { padding-right:0px !important; margin-bottom:0px;}
 
-.header .row_3 .dropdown {float:left; padding: 0px; margin: 0px;}
-.header .row_3 .dropdown dt {width:100px; padding:0 0 0 60px; font-weight:bold; cursor:pointer;color: #600000;}
-.header .row_3 .dropdown dt:hover {background:url(images/header_over.gif)}
-.header .row_3 .dropdown dd {position:absolute; overflow:hidden; width:195px; display:none; background:#fff; z-index:200; opacity:0}
-.header .row_3 .dropdown ul {width:195px; list-style:none; border-top:none}
-.header .row_3 .dropdown li {display:inline;}
-.header .row_3 .dropdown a, .dropdown a:active, .dropdown a:visited {display:block; padding:5px; color:#600000; text-decoration:none; background:#eaf0f2; width:194px;}
-.header .row_3 .dropdown a:hover {background:#d9e1e4; color:#000;}
-.header .row_3 .dropdown .underline {border-bottom:1px solid #b9d6dc;}
+.moduletable-categories ul.level2 { background:none; width:193px;  padding:0px; list-style-type:none; margin:0; position:absolute !important; top:42px !important; left:0px !important; visibility:hidden; }
+.moduletable-categories ul.level2 li { background:none!important; border:none; border-top:none;   font-weight:normal; padding:0 0 0 0px; margin:0; position:relative; float:none!important;}
+.moduletable-categories ul.level2 li a { text-decoration:none; font:normal 12px/25px Arial, Helvetica, sans-serif; padding:0px 0px 0px 10px !important; margin:0;border:1px solid #fff!important; border-top:none!important;
+color:#c36318; display:block; margin:0 0 0 0px; background:#f6f6f6 !important; text-transform:none; letter-spacing:0;}
 
-		
+.moduletable-categories ul.level2 li a:hover, .moduletable-categories ul.level2 li a.active , .moduletable-categories ul.level2 li a.selected { text-decoration:none; color:#fff;  background:#2b2b2b !important; border:1px solid #2b2b2b!important;border-top:none!important; margin:0; }
+
+.moduletable-categories ul.level3 {background:none; width:193px;  padding:0px; list-style-type:none; margin:0; position:absolute !important; top:0px !important; left:191px !important; }
+.moduletable-categories ul.level3 li a { color:#c36318;}
+.moduletable-categories ul.level3 li a:hover, .moduletable-categories ul.level3 li a.active { color:#fff!important;}
+
+/* ######### CSS classes applied to down and right arrow images  ######### */
+
+
+.ddshadow{ /*shadow for NON CSS3 capable browsers*/
+position: absolute;
+left: 0;
+top: 0;
+width: 0;
+height: 0;
+background: silver;
+display:none !important;
+}
+
+.toplevelshadow{ /*shadow opacity for NON CSS3 capable browsers. Doesn't work in IE*/
+}
+
+    
 /*----------- main ------------*/
 .main {
 	width: 100%;

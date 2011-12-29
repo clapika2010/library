@@ -141,7 +141,7 @@ init:function(setting){
 	}
 	this.shadow.enable=(document.all && !window.XMLHttpRequest)? false : this.shadow.enable //in IE6, always disable shadow
 	var $jQ=jQuery.noConflict();
-	$jQuery(document).ready(function($){ //ajax menu?
+	$jQ(document).ready(function($){ //ajax menu?
 		if (typeof setting.contentsource=="object"){ //if external ajax menu
 			ddsmoothmenu.getajaxmenu($, setting)
 		}
