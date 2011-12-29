@@ -16,6 +16,8 @@
 				</form>
 			</div><!-- end orderby_form -->
 			<div class="product_list">
+				{% if book_list %}
+					{% for book in book_list %}
 				<div class="odd">
 					<div class="browse_1">
 						<div class="separator">	
@@ -25,11 +27,11 @@
 								</div>
 							</div><!-- end elementR -->
 							<div class="productImg">
-								<img class="star" src="/static/images/demo.png" alt="name" />
+								<img class="star" src={{ book.image_link }} alt={{ book.name }} />
 							</div><!-- end productImg -->
 							<div class="floatElement">
-								<h2 class="title">Book name</h2>
-								<div class="description">comment</div><!-- end description -->
+								<h2 class="title">{{ book.name }}</h2>
+								<div class="description">{{ book.description }}</div><!-- end description -->
 								<div class="rating">
 									<img src="/static/images/star.png" alt="" />
 									<strong>Total votes: 0</strong>			
@@ -41,6 +43,8 @@
 						</div><!-- end separator -->
 					</div><!-- end browse -->
 				</div><!-- end odd -->
+					{% endfor %}
+				{% endif %}
 			</div><!-- end product_list -->
 		</div><!-- end left -->
 	</div><!-- end wrapper -->

@@ -32,17 +32,26 @@ def home(request):
 	context_instance = RequestContext(request))
 
 def information(request):
+	#TODO: tra ve cuon sach duoc yeu cau biet thong tin
 	return render_to_response('info.html', 
 	{'title': 'Information'},
 	context_instance = RequestContext(request))
 
 def category(request):
-	return render_to_response('category.html', 
-	{'title': 'Category'},
+	book_list = Ebook.objects.all()
+	#TODO: lay sach theo category tra ve book_list
+	return render_to_response('list.html', 
+	{'title': 'Category',
+	 'book_list' : book_list},
 	context_instance = RequestContext(request))
 	
 def subject(request, name):
-	pass
+	#TODO: tra ve book_list la sach theo chu de la name
+	book_list = list(Ebook.objects.all())
+	return render_to_response('list.html',
+	{'title' : name,
+	 'book_list' : book_list},
+	context_instance = RequestContext(request))
 	
 def log_in(request):
 	pass
@@ -96,7 +105,9 @@ def search(request):
 		searchResults = paginator.page(1)
 	except EmptyPage:
 		searchResults = paginator.page(paginator.num_pages)
-	return render_to_response('searchResult.html', {"searchResults": searchResults},context_instance=RequestContext(request))
+	
+	return render_to_response('list.html', {"book_list": searchResults.object_list},context_instance=RequestContext(request))
+
 def view(request, name):
 #	book.html
 	pass

@@ -28,9 +28,9 @@
 						<div class="logo"></div><!-- END logo -->
 						<div class="search_area">
 							<div class="search">
-								<form action="/search" method="GET">
-									<input type="text" name="searchTxt" class="inputbox" maxlength="80" value="Enter search keywords here" />
-									<input type="submit" class="button" value="" onclick="preCheckSearch(this.form)"/>
+								<form action="http://127.0.0.1:8000/search" method="GET">
+									<input type="text" name="searchTxt" class="inputbox" maxlength="80" onclick="this.value='';" value="Enter search keywords here" />
+									<input type="submit" class="button" value="" onclick="preCheckSearch(this.form);"/>
 								</form>
 							</div><!-- END search -->
 						</div><!-- END search -->
