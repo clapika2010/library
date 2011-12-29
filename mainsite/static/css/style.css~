@@ -125,7 +125,7 @@ body {
 .header .row_3 .dropdown {float:left; padding: 0px; margin: 0px;}
 .header .row_3 .dropdown dt {width:100px; padding:0 0 0 60px; font-weight:bold; cursor:pointer;color: #600000;}
 .header .row_3 .dropdown dt:hover {background:url(images/header_over.gif)}
-.header .row_3 .dropdown dd {position:absolute; overflow:hidden; width:208px; display:none; background:#fff; z-index:200; opacity:0}
+.header .row_3 .dropdown dd {position:absolute; overflow:hidden; width:195px; display:none; background:#fff; z-index:200; opacity:0}
 .header .row_3 .dropdown ul {width:195px; list-style:none; border-top:none}
 .header .row_3 .dropdown li {display:inline;}
 .header .row_3 .dropdown a, .dropdown a:active, .dropdown a:visited {display:block; padding:5px; color:#600000; text-decoration:none; background:#eaf0f2; width:194px;}
