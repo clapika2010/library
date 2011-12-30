@@ -16,3 +16,14 @@ class UploadForm(ModelForm):
 		super(UploadForm, self).__init__(*args, **kwargs)
 		self.fields['published_date'].widget=HiddenInput()
 		self.fields['authors'].widget=HiddenInput()
+		
+class LoginForm(forms.Form):
+    name = forms.CharField(label='Username')
+    password = forms.CharField(widget=forms.PasswordInput,label='Password')
+	
+class RegisterForm(forms.Form):
+	firstname = forms.CharField(label='Firstname')
+	lastname = forms.CharField(label='Lastname')
+	username = forms.CharField(label='Username')
+	password = forms.CharField(widget=forms.PasswordInput,label='Password')
+	email = forms.EmailField(label='Email')

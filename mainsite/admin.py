@@ -38,4 +38,4 @@ admin.site.register(UserInfo, InfoAdmin)
 admin.site.register(Download)
 admin.site.register(Level)
 admin.site.register(Rate)
-
+admin.site.register(Question)

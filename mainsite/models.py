@@ -9,7 +9,10 @@ class Ebook (models.Model):
 	description=models.TextField()
 	upload_time=models.DateField(default=datetime.date.today())
 	published_date=models.DateField()
+	ave_rate=models.IntegerField()
+	rate_times=models.IntegerField()
 	rates=models.ManyToManyField('UserInfo',through='Rate',related_name='ebook_rate')
+	downloads=models.ManyToManyField('UserInfo',through='Download',related_name='ebook_download')
 	category=models.ManyToManyField('Category',through='Level',null=True)
 	subject=models.ManyToManyField('Subject',null=True)
 	comments=models.ManyToManyField('UserInfo',through='Comment',related_name='ebook_comment')
@@ -100,7 +103,11 @@ class Rate(models.Model):
 	ebook=models.ForeignKey(Ebook)
 	rate=models.IntegerField(choices=CHOICES)
 	
+class Question(models.Model):
+	question = models.CharField(max_length=300)
+	answer = models.CharField(max_length=100)
 
-
+	def __unicode__(self):
+		return "Question "+str(self.id)
 
 

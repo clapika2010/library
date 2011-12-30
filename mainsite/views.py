@@ -8,7 +8,9 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail, BadHeaderError
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+import random
 from itertools import chain
+
 
 def home(request):
 	book_list = Ebook.objects.all()
@@ -18,11 +20,13 @@ def home(request):
 
 	# sach cho top download
 	# TODO: tinh ra book_top la list 5 sach so lan tai nhieu nhat
-	book_top = list()
+	book_top = Ebook.objects.annotate(donwload_times=Count(downloads)).order_by('donwload_times')[0:5]
 
 	# mybook bac nao lam csdl lam cho le
 	# TODO: book_my la list 5 sach cua thang dang dang nhap
-	book_my = list()
+	book_my = list(Ebook.objects.filter(uploader=request.user))
+	if len(book_my) > 5:
+		book_my =  book_my[0:5]
 
 	return render_to_response('home.html',
 	{'title' : 'Home',
@@ -53,15 +57,68 @@ def subject(request, name):
 	 'book_list' : book_list},
 	context_instance = RequestContext(request))
 	
-def log_in(request):
-	pass
-
 def register(request):
-	pass
+	errors = []
+	form2=RegisterForm()
+	que = Question.objects.get(id=((int)(random.random()*10))%6+1).question
+	if request.method == 'POST':		
+		form1 = RegisterForm(request.POST)	
+		if form1.is_valid():
+			try:
+				date = datetime.datetime.now()
+				cd = form1.cleaned_data		
+				users = User.objects.get(username=cd['username'])
+				return redirect("/login")
+			except User.DoesNotExist:
+				try:
+					users1 = User.objects.get(email=cd['email'])
+				except User.DoesNotExist:
+					try:		
+						print(request.POST.get('question'))
+						questions = Question.objects.get(answer = request.POST.get('answer'), question= request.POST.get('question'))
+						
+					except Question.DoesNotExist:	
+						errors.append('Answer is wrong')
+						return render_to_response('register.html', {'form': form1, 'errors':errors, 'question':que})						
+					else:
+						p1 = User.objects.create(username=cd['username'],  first_name=cd['firstname'], last_name=cd['lastname'],
+											email = cd['email'], password = cd['password'], is_staff=True, is_active = True, is_superuser= False,
+											last_login=date, date_joined=date)							
+						return render_to_response('login_success.html',{'firstname': p1.first_name,'lastname': p1.last_name })
+						
+				else:
+					errors.append('Email: %s is exist' %cd['email'])
+					return render_to_response('register.html', {'form': form1, 'errors':errors,'question': que})
+			else:
+				errors.append('Username: %s is exist' %cd['username'])
+				return render_to_response('register.html', {'form': form1, 'errors':errors, 'question':que})
+				
+	else:
+		form1 = RegisterForm()
+	return render_to_response('register.html', {'form': form1, 'errors':errors, 'question': que})
+
+
+def log_in(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+			try:
+				cd = form.cleaned_data
+				users = User.objects.get(username=cd['name'],password=cd['password']) 
+			except User.DoesNotExist:
+				return render_to_response('login.html',{'form':form, 'error': True, 'account':cd['name']})
+			else:
+				users.last_login = datetime.datetime.now()
+				users.save()
+				return render_to_response('login_success.html',{'firstname': users.first_name,'lastname': users.last_name })			
+    else:
+        form = LoginForm()
+    return render_to_response('login.html', {'form': form, 'error':False})
 	
 def log_out(request):
-	pass
+	return redirect("/home")		
 
+@login_required(login_url="/login")
 def upload(request):
 	if request.method == "POST":
 		form = UploadForm(request.POST)

@@ -1,0 +1,25 @@
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+	{% if error %}
+		<p style="color: red;">
+            Account: {{account}} is invalid.
+        </p>
+	{% endif %}
+    {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+    <form action="" method="post">		 
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Login">
+    </form>
+	<a href="/register">Register a new account</a>
+</body>
+</html>
