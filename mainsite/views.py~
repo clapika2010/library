@@ -25,7 +25,7 @@ def home(request):
 
 	# mybook bac nao lam csdl lam cho le
 	# TODO: book_my la list 5 sach cua thang dang dang nhap
-	if not request.user.is_anomyous():
+	if not request.user.is_anonymous():
 		book_my = list(Ebook.objects.filter(uploader__user=request.user))
 		if len(book_my) > 5:
 			book_my =  book_my[0:5]
