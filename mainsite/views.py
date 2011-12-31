@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail, BadHeaderError
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Count
 import random
 from itertools import chain
 
@@ -20,13 +21,16 @@ def home(request):
 
 	# sach cho top download
 	# TODO: tinh ra book_top la list 5 sach so lan tai nhieu nhat
-	book_top = Ebook.objects.annotate(donwload_times=Count(downloads)).order_by('donwload_times')[0:5]
+	book_top = Ebook.objects.annotate(donwload_times=Count('downloads')).order_by('donwload_times')[0:5]
 
 	# mybook bac nao lam csdl lam cho le
 	# TODO: book_my la list 5 sach cua thang dang dang nhap
-	book_my = list(Ebook.objects.filter(uploader=request.user))
-	if len(book_my) > 5:
-		book_my =  book_my[0:5]
+	if not request.user.is_anonymous():
+		book_my = list(Ebook.objects.filter(uploader__user=request.user))
+		if len(book_my) > 5:
+			book_my =  book_my[0:5]
+	else:
+		book_my=[]
 
 	return render_to_response('home.html',
 	{'title' : 'Home',

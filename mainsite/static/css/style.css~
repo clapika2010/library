@@ -95,7 +95,7 @@ body {
 /* ---------------------- categories --- */
 .header .row_3 {
 	float: top;
-	height: 50px;
+	height: 40px;
 	width: 100%;
 	background: url('/static/images/header-bg-bot.jpg') bottom repeat-x;
 	}
@@ -699,8 +699,17 @@ display:none !important;
 		}
 
 
+/*----------------------login-----------------------*/
+.login {
+	width: 100%;
+	height: 300px;
+	}
 
-
+.login .content {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding-top: 100px;
 
 
 

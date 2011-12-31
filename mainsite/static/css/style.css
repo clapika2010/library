@@ -699,8 +699,18 @@ display:none !important;
 		}
 
 
+/*----------------------login-----------------------*/
+.login {
+	width: 100%;
+	height: 300px;
+	}
 
-
+.login .content {
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding-top: 100px;
+	}
 
 
 

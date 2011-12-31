@@ -6,7 +6,7 @@ from library.mainsite.models import *
 class EbookForm(ModelForm):
 	class Meta:
 		model=Ebook
-		exclude=('slug','upload_time','uploader','comments','rates','downloads','ave_rate','rate_times')
+		exclude=('slug','upload_time','uploader','comments','rates','downloads')
 		
 class UploadForm(ModelForm):
 	class Meta:
