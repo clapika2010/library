@@ -1,0 +1,460 @@
+/*----------------------login-----------------------*/
+.toplinks {
+	float: right;
+	height: 100%;
+	width: 500px;
+	padding: 0px;
+	margin: 0px;
+	color: white;
+	font: normal normal normal 11px Arial, Tahoma, Calibri, Verdana, Geneva, sans-serif;
+	text-align: right;
+	background: none;
+	}
+	
+.standard_error {
+	max-width: 710px;
+	margin: 0px;
+	padding: 70px 0 0 60px;
+	}
+	
+	.register {
+	max-width: 710px;
+	margin: 0px;
+	padding: 70px 0 0 60px;
+	height: 1000px;
+	}
+	
+.blockhead {
+	font: normal 16px Tahoma, Calibri, Verdana, Geneva, sans-serif;
+	color: white;
+	background: #7192A8 url('/static/images/newbtn_middle.png') repeat-x;
+	background-image: none;
+	padding-top: 8px;
+	margin: 0px;
+	height: 25px;
+	border: 1px solid #5A7F97;
+	}	
+
+.vbform {
+	clear: both;
+	width: auto;
+	max-width: 710px;
+	width: 750px;
+	margin: 0 auto 2em;
+	}
+
+.block {
+	clear: both;
+	padding: 0;
+	color: ;
+	font: ;
+	}	
+
+.formcontrols {
+	border-right: 1px solid #6B91AB;
+	border-left: 1px solid #6B91AB;
+	border-bottom: 1px solid #6B91AB;
+	margin: 0px;
+	padding: 0px;
+	}
+
+.blockbody {
+	background: white none no-repeat;
+	padding: 0px;
+	margin: 0px;
+	}
+
+.formcontrols .blockrow {
+	background: white none;
+	border-top: solid 1px #CEDFEB;
+	padding: 10px 5px;
+	}
+
+.formcontrols .blocksubhead {
+	font-weight: bold;
+	margin: 0px;
+	}
+
+.blocksubhead {
+	font: normal 12px;
+	color: #3E3E3E;
+	background: #E9E9E9 none repeat-x;
+	padding: 4px 10px 4px 10px;
+	border-top: 1px solid #CECECE;
+	}
+
+.formcontrols .blockrow label {
+	width: 212px;
+	float: left;
+	font-size: 16px;
+	}
+
+.formcontrols .blockrow .primary {
+	width: 248px;
+	}
+
+	.formcontrols input .textbox {
+	height: 25px;
+	}
+
+.formcontrols .blockrow .singlecheck label {
+	float: left;
+	}
+
+.vbform .actionbuttons .group {
+	margin: 0 auto;
+	width: auto;
+	max-width: 750px;
+	_width: 750px;
+	}
+
+.actionbuttons .group {
+	float: none;
+	text-align: right;
+	padding: 0 10px 0 10px;
+	}
+
+.actionbuttons .group .button {
+	cursor: pointer;
+	padding: 2.5px 5px;
+	font: bold 11px Tahoma, Calibri, Verdana, Geneva, sans-serif;
+	border: 1px solid #A8A8A8;
+	color: #424242;
+	background: #E9E9E9 url('/static/images/generic_button.png') repeat-x top left;
+	}
+
+
+	.toplinks ul.nouser {
+		display: block;
+		float: right;
+		clear: left;
+		list-style: none;
+		margin: 3px;
+	}
+	
+		.toplinks ul.isuser {
+		display: block;
+		float: right;
+		clear: left;
+		list-style: none;
+		margin: 3px;
+	}
+	
+.toplinks ul.nouser li {
+	display: inline;
+	list-style: none;
+	float: left;
+	}
+
+.toplinks ul.nouser li a {
+	display: block;
+	float: right;
+	clear: left;
+	color: white;
+	position: relative;
+	padding: 6px 10px 0 10px;
+	background: #404040;
+	height: 20px;
+	font-weight: bold;
+	font-size: 12px;
+	margin-right: 10px;
+	}
+
+.toplinks form {
+	min-width: 220px;
+	display: block;
+	margin-right: 10px;
+	text-align: left;
+	float: left;
+	clear: left;
+	}
+
+.toplinks .logindetails {
+	padding: 0 10px;
+	text-align: center;
+	background: #404040;
+	height: 26px;
+	}
+
+	fieldset, img {
+	border: 0;
+	border-image: initial;
+	}
+
+.toplinks form input {
+	margin: 3px 0 0;
+	vertical-align: baseline;
+	font-size: 11px;
+	padding: 1px;
+	border: 0;
+	}
+
+.toplinks form input.default-value {
+	color: #828282;
+	}
+
+.toplinks form input.textbox {
+	color: #303030;
+	}
+
+.toplinks form input {
+	margin: 3px 0 0;
+	vertical-align: baseline;
+	font-size: 11px;
+	padding: 1px;
+	border: 0;
+	}
+
+.textbox, textarea, select {
+	background: white none;
+	border: solid 1px #6B91AB;
+	padding: 4px 5px;
+	outline: 0;
+	}
+
+.toplinks form input.loginbutton {
+	font-size: 11px;
+	padding: 0 5px;
+	border: solid 1px #415D8D;
+	}
+
+.toplinks ul.isuser li {
+	list-style: none;
+	display: inline;
+	position: relative;
+	color: #A8A8A8;
+	float: right;
+	clear: left;	
+	padding-right: 10px;
+	}
+
+.toplinks ul.isuser li a {
+	display: block;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	padding-left: 4px;
+	padding-right: 4px;
+	font-weight: bold;
+	color: white;
+	}				
+	
+	.toplinks ul.isuser li.welcomelink {
+		display: block;
+		float: right;
+		clear: left;
+		padding-top: 3px;
+		padding-bottom: 3px;
+		padding-left: 4px;
+		padding-right: 4px;
+		}			
+		
+		.toplinks ul.isuser li.welcomelink a {
+		display: inline;
+		float: none;
+		clear: none;
+		margin-left: 0;
+		}
+		
+/*----------------------------register---------------------*/
+.vbform {
+	clear: both;
+	width: auto;
+	max-width: 750px;
+	margin: 0px auto 2em;
+	}
+	
+.block {
+	clear: both;
+	padding: 0;
+	}
+	
+.vbform .blockhead:first-child {
+	margin-top: 0;
+	}
+
+.vbform .blockhead {
+	margin-top: 3em;
+	}
+
+.blockhead {
+	font: normal 12px Tahoma, Calibri, Verdana, Geneva, sans-serif;
+	color: white;
+	background: #7192A8 url('/static/images/newbtn_middle.png') repeat-x;
+	padding: 4px 10px 0 10px;
+	margin-top: 10px;
+	border: 1px solid #5A7F97;
+	}
+	
+.formcontrols .blocksubhead {
+	font-weight: bold;
+	}
+
+.blocksubhead {
+	font: normal 12px;
+	color: #3E3E3E;
+	background: #E9E9E9 none repeat-x;
+	padding: 4px 10px 4px 10px;
+	border-top: 1px solid #CECECE;
+	}
+
+form .rightcol {
+	display: block;
+	margin-left: 212px;
+	max-width: 496px;
+	float: none;
+	}
+
+.blockbody.formcontrols .blockrow .rightcol .primary {
+	width: 50%;
+	}
+
+.blockbody.formcontrols .blockrow .rightcol * {
+	margin-left: 0;
+	width: auto;
+	}
+	
+.blockbody.formcontrols .blockrow .rightcol .description {
+	margin-left: 0;	
+	}
+
+.blockbody.formcontrols .blockrow .rightcol .description {
+	width: auto;
+	}	
+
+.formcontrols .blockrow .group {
+	width: 100%;
+	}
+
+.formcontrols .blockrow .group li:first-child {
+	margin-top: 0;
+	}
+
+	.formcontrols .blockrow .group li {
+	margin-top: 5px;
+	list-style: none;
+	}
+
+.formcontrols .blockrow .group li label, .formcontrols .blockrow .group dt label {
+	width: 212px;
+	float: left;
+	}
+
+.formcontrols .blockrow * label {
+	display: block;
+	margin-bottom: auto;
+	width: auto;
+	float: none;
+	}
+
+.formcontrols .blockrow label {
+	width: 212px;
+	float: left;
+	font-size: 13px;
+	}
+
+.formcontrols .blockrow .description {
+	color: #777;
+	font-size: 11px;
+	max-width: 496px;
+	margin-left: 212px;
+	overflow: hidden;
+	line-height: 150%;
+	margin-bottom: 5px;
+	}
+
+strong, b {
+	font-weight: bolder;
+	}
+
+.formcontrols .blockrow .description {
+	color: #777;
+	font-size: 11px;
+	line-height: 150%;
+	}
+
+.formcontrols .section {
+	padding: 0 15px;
+	}
+
+.formcontrols .blockrow .label {
+	margin-bottom: 8px;
+	}
+
+#rules {
+	background-color: white;
+	height: 75px;
+	overflow: auto;
+	padding: 10px;
+	border: solid 1px #6B91AB;
+	}
+
+#rules {
+	margin-bottom: 10px;
+	border-bottom: 1px solid #C4C4C4;
+	border-left: 1px solid #C4C4C4;
+	border-right: 1px solid #C4C4C4;
+	border-top: 1px solid white;
+	background: white url('/static/images/gradient-greytowhite.png') repeat-x;
+	}
+
+.restore p, .restore fieldset, .restore table, .restore pre {
+	margin-bottom: 1em;	
+	}
+
+.restore h1, .restore h2, .restore h3, .restore h4, .restore h5, .restore h6, .restore strong, .restore dt {
+	font-weight: bold;
+	}
+
+.formcontrols .blockrow.singlecheck label {
+	float: left;	
+	}
+
+.formcontrols .blockrow label.full {
+	width: auto;
+	float: none;
+	font-weight: bold;
+	}
+
+.formcontrols input.button, .actionbuttons {
+	max-width: 100%;
+	}
+	
+.blockfoot, .blocksubfoot {
+	padding: 5px 0px 5px 0px;
+	}
+
+.blockfoot, .blocksubfoot {
+	display: block;
+	clear: both;
+	background: white none;
+	padding: 5px 0px 5px 0px;
+	border: 0 #6C0;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

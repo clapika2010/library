@@ -25,7 +25,7 @@
 						</div>
 						<div class="toplinks">
 						<!-- neu user chua dang nhap thi hien cai class nouser -->
-							<!--<ul class="nouser">
+							<ul class="nouser">
 								<li>
 									<form>
 										<fieldset class="logindetails">
@@ -38,9 +38,9 @@
 									</form>
 								</li>
 								<li><a href="" >Register</a></li>
-							</ul> -->
+							</ul> 
 						<!-- ket thuc giao dien cho user chua dang nhap -->
-						<!-- neu user da dang nhap thi hien cai giao dien duoi day -->
+						<!-- neu user da dang nhap thi hien cai giao dien duoi day 
 							<ul class="isuser">
 								<li><a href="" >Sign out</a></li>
 								<li><a href="" >Setting</a></li>
