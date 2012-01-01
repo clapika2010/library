@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 
+<div id="wrapper">
+<div class="standard_error">
 <form id="" action="" name="" class="vbform block">
 	<h2 class="blockhead">Register</h2>
 	<div class="blockbody formcontrols">
@@ -8,6 +10,7 @@
 		<div class="section">
 			<div class="blockrow">
 				<ul class="group">
+					<!-- ######################Xu ly user name o day########################### -->
 					<label for="">User name:</label>
 					<div class="rightcol">
 						<input class="primary textbox" id="" type="text" name="" maxlength="16" value="" tabindex="1"/>
@@ -18,6 +21,7 @@
 			</div><!-- end blockrow -->
 			<div class="blockrow">
 				<ul class="group">
+					<!-- #######################Xu ly password o day############################# -->
 					<li>
 						<label for="">Password:</label>
 						<input type="password" class="textbox" name="" id=""	maxlength="50" tabindex="1" />
@@ -33,6 +37,7 @@
 			</div><!-- end blockrow -->
 			<div class="blockrow">
 				<ul class="group">
+					<!-- ########################## Xu ly email o day #############################3 -->
 					<li>
 						<label for="">Email:</label>
 						<input type="password" class="textbox" name="" id=""	maxlength="50" tabindex="1" />
@@ -46,6 +51,7 @@
 			</div><!-- end blockrow -->
 			<div class="blockrow">
 				<ul class="group">
+					<!-- ############################# Cau hoi random o day ######################### -->
 					<label for="">Question:</label>
 					<input type="text" class="textbox" name="" id="" maxlength="50" tabindex="1" />
 					<p class="description">Cho cau hoi vo day nha bac Nhan</p>
@@ -87,5 +93,5 @@ If you would like to cancel the registration, click <a href="/home" >here</a> to
 		</div><!-- end group -->
 	</div><!-- end blockfoot -->
 </form>
-
+</div></div>
 {% endblock %}

@@ -727,6 +727,13 @@ display:none !important;
 	padding: 70px 0 0 60px;
 	}
 	
+	.register {
+	max-width: 710px;
+	margin: 0px;
+	padding: 70px 0 0 60px;
+	height: 1000px;
+	}
+	
 .blockhead {
 	font: normal 16px Tahoma, Calibri, Verdana, Geneva, sans-serif;
 	color: white;
@@ -974,7 +981,7 @@ display:none !important;
 	clear: both;
 	width: auto;
 	max-width: 750px;
-	margin: 70px auto 2em;
+	margin: 0px auto 2em;
 	}
 	
 .block {

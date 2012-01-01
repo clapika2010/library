@@ -117,7 +117,7 @@ body {
 .moduletable-categories ul.level1 li a:hover .downarrowclass , .moduletable-categories ul.level1 li a.active .downarrowclass , .moduletable-categories ul.level1 li a.selected .downarrowclass { display:block;} 
 
 .moduletable-categories ul.level1 { list-style:none; margin:0; padding:0 0 0 1px;}
-.moduletable-categories ul.level1 li { background:url('static/images/cat-divider.gif') right top no-repeat;  z-index:98; font:bold 16px/25px Arial, Helvetica, sans-serif; float:left; letter-spacing:0px;  border:none; position:relative;text-transform:uppercase;}
+.moduletable-categories ul.level1 li { background:url('/static/images/cat-divider.gif') right top no-repeat;  z-index:98; font:bold 16px/25px Arial, Helvetica, sans-serif; float:left; letter-spacing:0px;  border:none; position:relative;text-transform:uppercase;}
 .moduletable-categories ul.level1 li a  { text-decoration:none; margin-right:0px; padding:8px 20px 9px 18px; color:#6f422b; display:inline-block; background:none; border:none; border-left:none;}
 .moduletable-categories ul.level1 li a.parent { padding-right:38px !important; margin-bottom:0px;}
 .moduletable-categories ul.level1 li a:hover , .moduletable-categories ul.level1 li a.active , .moduletable-categories ul.level1 li a.selected  {background:url(/static/images/cat-a.active.jpg); color:#fff; margin-right:2px; padding-right:18px;}
@@ -974,7 +974,7 @@ display:none !important;
 	clear: both;
 	width: auto;
 	max-width: 750px;
-	margin: 70px auto 2em;
+	margin: 0px auto 2em;
 	}
 	
 .block {
