@@ -130,7 +130,7 @@ def upload(request):
 			form.save()
 	else: 
 		form = UploadForm()			
-	return render_to_response("upload.html",{"form":form},context_instance=RequestContext(request))		
+	return render_to_response("upload2.html",{"form":form},context_instance=RequestContext(request))		
 			
 	
 def create(request):

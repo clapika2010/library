@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="content"><div id="wrapper">
+	<h1>Upload book</h1>
+	<div id="content-main">
+		<form>
+			<fieldset class="module aligned">
+				<div class="form-row name">
+					<div>
+						<label for="" class="required">Book name:</label>
+						<input type="text" id="" class="vTextField" name="" maxlength="100" />
+						<input type="submit" value="Search" id="" class="" name="" />
+					</div>
+				</div><!-- end book name -->
+				<div class="form-row name">
+					<div>
+						<label for="" class="required">Name:</label>
+						<input id="" type="text" class="vTextField" name="" maxlength="100" />
+					</div>
+				</div><!-- end name -->
+				<div class="form-row description">
+					<div>
+						<label for="" class="required">Description:</label>
+						<textarea id="" rows="10" cols="40" name="" class="vLargeTextField"></textarea>
+					</div>
+				</div><!-- end description -->
+				<div class="form-row subject">
+					<div>
+						<label for="" class="required">Category:</label>
+						<div class="selector">
+							<div class="selector-available">
+								<h2>Available category</h2>
+								<p class="selector-filter">
+									<label style="width:16px;padding:2px;"><img src="/static/images/selector-search.gif" alt="filter" ></label>
+									<input type="text" id="" size="28.5"/>
+								</p>
+								<select multiple="multiple" class="filtered" name="" id=""></select>
+								<a href="" >Choose all</a>
+							</div><!-- end available -->
+							<ul class="selector-chooser">
+								<li><a href="" class="selector-add">Add</a></li>
+								<li><a href="" class="selector-remove">Remove</a></li>
+							</ul><!-- end chooser -->
+							<div class="selector-chosen">
+								<h2>Choosen category</h2>
+								<p class="selector-filter">Select your choice(s) and click <img src="/static/images/selector-add.gif" alt="" ></p>
+								<select id="" multiple="multiple" size="0" name="" class="filtered"></select>
+								<a href="" >Clear all</a>
+							</div><!-- end chosen -->
+						</div><!-- end selector -->
+					</div>
+				</div><!-- end category -->
+				<div class="form-row subject">
+					<div>
+						<label for="" class="required">Subject:</label>
+						<div class="selector">
+							<div class="selector-available">
+								<h2>Available subject</h2>
+								<p class="selector-filter">
+									<label style="width:16px;padding:2px;"><img src="/static/images/selector-search.gif" alt="filter" ></label>
+									<input type="text" id="" size="28.5"/>
+								</p>
+								<select multiple="multiple" class="filtered" name="" id=""></select>
+								<a href="" >Choose all</a>
+							</div><!-- end available -->
+							<ul class="selector-chooser">
+								<li><a href="" class="selector-add">Add</a></li>
+								<li><a href="" class="selector-remove">Remove</a></li>
+							</ul><!-- end chooser -->
+							<div class="selector-chosen">
+								<h2>Choosen subject</h2>
+								<p class="selector-filter">Select your choice(s) and click <img src="/static/images/selector-add.gif" alt="" ></p>
+								<select id="" multiple="multiple" size="0" name="" class="filtered"></select>
+								<a href="" >Clear all</a>
+							</div><!-- end chosen -->
+						</div><!-- end selector -->
+					</div>
+				</div><!-- end subject -->
+			</fieldset>
+			<div class="submit-row">
+				<input type="submit" value="Upload" class="default" name="" />
+				<input type="reset" value="Reset" class="default" name="" />
+			</div><!-- submit -->
+		</form>
+	</div><!-- end content-main -->
+</div><!-- end content -->
+</div>
+
+{% endblock %}

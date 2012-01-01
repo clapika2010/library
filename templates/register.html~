@@ -2,7 +2,7 @@
 {% block content %}
 
 <div id="wrapper">
-<div class="standard_error">
+<div class="register">
 <form id="" action="" name="" class="vbform block">
 	<h2 class="blockhead">Register</h2>
 	<div class="blockbody formcontrols">

@@ -117,7 +117,7 @@ def log_in(request):
 				return render_to_response('login_success.html',{'firstname': users.first_name,'lastname': users.last_name })			
     else:
         form = LoginForm()
-    return render_to_response('login.html', {'form': form, 'error':False})
+    return render_to_response('login_fail.html', {'form': form, 'error':False})
 	
 def log_out(request):
 	return redirect("/home")		
