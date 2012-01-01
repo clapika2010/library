@@ -108,7 +108,7 @@ body {
 	width: 100%;
 	background: url('/static/images/header-bg-bot.jpg') bottom repeat-x;
 	}
-.moduletable-categories { border:none; background:url('/static/images/cat-divider.gif') left top no-repeat; height:42px; width:100%; position:absolute; top:120px; left:-1px; z-index:100;}
+.moduletable-categories { border:none; background:url(/static/images/cat-divider.gif) left top no-repeat; height:42px; width:100%; position:absolute; top:120px; left:-1px; z-index:100;}
 	
 .rightarrowclass { display:none !important;}
 .ddsmoothmenu { background:none !important; padding:0px 0 0 0px;}
@@ -117,10 +117,10 @@ body {
 .moduletable-categories ul.level1 li a:hover .downarrowclass , .moduletable-categories ul.level1 li a.active .downarrowclass , .moduletable-categories ul.level1 li a.selected .downarrowclass { display:block;} 
 
 .moduletable-categories ul.level1 { list-style:none; margin:0; padding:0 0 0 1px;}
-.moduletable-categories ul.level1 li { background:url('static/images/cat-divider.gif') right top no-repeat;  z-index:98; font:bold 16px/25px Arial, Helvetica, sans-serif; float:left; letter-spacing:0px;  border:none; position:relative;text-transform:uppercase;}
+.moduletable-categories ul.level1 li { background:url('/static/images/cat-divider.gif') right top no-repeat;  z-index:98; font:bold 16px/25px Arial, Helvetica, sans-serif; float:left; letter-spacing:0px;  border:none; position:relative;text-transform:uppercase;}
 .moduletable-categories ul.level1 li a  { text-decoration:none; margin-right:0px; padding:8px 20px 9px 18px; color:#6f422b; display:inline-block; background:none; border:none; border-left:none;}
 .moduletable-categories ul.level1 li a.parent { padding-right:38px !important; margin-bottom:0px;}
-.moduletable-categories ul.level1 li a:hover , .moduletable-categories ul.level1 li a.active , .moduletable-categories ul.level1 li a.selected  {background:url('static/images/cat-a.active.jpg'); color:#fff; margin-right:2px; padding-right:18px;}
+.moduletable-categories ul.level1 li a:hover , .moduletable-categories ul.level1 li a.active , .moduletable-categories ul.level1 li a.selected  {background:url(/static/images/cat-a.active.jpg); color:#fff; margin-right:2px; padding-right:18px;}
 .moduletable-categories ul.level1 li a.parent:hover , .moduletable-categories ul.level1 li a.parent.active , .moduletable-categories ul.level1 li a.parent.selected  { margin-right:2px; padding-right:36px!important;}
 
 
@@ -757,12 +757,14 @@ display:none !important;
 	border-right: 1px solid #6B91AB;
 	border-left: 1px solid #6B91AB;
 	border-bottom: 1px solid #6B91AB;
+	margin: 0px;
+	padding: 0px;
 	}
 
 .blockbody {
 	background: white none no-repeat;
-	padding-left: 0px;
-	padding-right: 0px;
+	padding: 0px;
+	margin: 0px;
 	}
 
 .formcontrols .blockrow {
@@ -773,6 +775,7 @@ display:none !important;
 
 .formcontrols .blocksubhead {
 	font-weight: bold;
+	margin: 0px;
 	}
 
 .blocksubhead {
@@ -965,3 +968,206 @@ display:none !important;
 		clear: none;
 		margin-left: 0;
 		}
+		
+/*----------------------------register---------------------*/
+.vbform {
+	clear: both;
+	width: auto;
+	max-width: 750px;
+	margin: 70px auto 2em;
+	}
+	
+.block {
+	clear: both;
+	padding: 0;
+	}
+	
+.vbform .blockhead:first-child {
+	margin-top: 0;
+	}
+
+.vbform .blockhead {
+	margin-top: 3em;
+	}
+
+.blockhead {
+	font: normal 12px Tahoma, Calibri, Verdana, Geneva, sans-serif;
+	color: white;
+	background: #7192A8 url('/static/images/newbtn_middle.png') repeat-x;
+	padding: 4px 10px 0 10px;
+	margin-top: 10px;
+	border: 1px solid #5A7F97;
+	}
+	
+.formcontrols .blocksubhead {
+	font-weight: bold;
+	}
+
+.blocksubhead {
+	font: normal 12px;
+	color: #3E3E3E;
+	background: #E9E9E9 none repeat-x;
+	padding: 4px 10px 4px 10px;
+	border-top: 1px solid #CECECE;
+	}
+
+form .rightcol {
+	display: block;
+	margin-left: 212px;
+	max-width: 496px;
+	float: none;
+	}
+
+.blockbody.formcontrols .blockrow .rightcol .primary {
+	width: 50%;
+	}
+
+.blockbody.formcontrols .blockrow .rightcol * {
+	margin-left: 0;
+	width: auto;
+	}
+	
+.blockbody.formcontrols .blockrow .rightcol .description {
+	margin-left: 0;	
+	}
+
+.blockbody.formcontrols .blockrow .rightcol .description {
+	width: auto;
+	}	
+
+.formcontrols .blockrow .group {
+	width: 100%;
+	}
+
+.formcontrols .blockrow .group li:first-child {
+	margin-top: 0;
+	}
+
+	.formcontrols .blockrow .group li {
+	margin-top: 5px;
+	list-style: none;
+	}
+
+.formcontrols .blockrow .group li label, .formcontrols .blockrow .group dt label {
+	width: 212px;
+	float: left;
+	}
+
+.formcontrols .blockrow * label {
+	display: block;
+	margin-bottom: auto;
+	width: auto;
+	float: none;
+	}
+
+.formcontrols .blockrow label {
+	width: 212px;
+	float: left;
+	font-size: 13px;
+	}
+
+.formcontrols .blockrow .description {
+	color: #777;
+	font-size: 11px;
+	max-width: 496px;
+	margin-left: 212px;
+	overflow: hidden;
+	line-height: 150%;
+	margin-bottom: 5px;
+	}
+
+strong, b {
+	font-weight: bolder;
+	}
+
+.formcontrols .blockrow .description {
+	color: #777;
+	font-size: 11px;
+	line-height: 150%;
+	}
+
+.formcontrols .section {
+	padding: 0 15px;
+	}
+
+.formcontrols .blockrow .label {
+	margin-bottom: 8px;
+	}
+
+#rules {
+	background-color: white;
+	height: 75px;
+	overflow: auto;
+	padding: 10px;
+	border: solid 1px #6B91AB;
+	}
+
+#rules {
+	margin-bottom: 10px;
+	border-bottom: 1px solid #C4C4C4;
+	border-left: 1px solid #C4C4C4;
+	border-right: 1px solid #C4C4C4;
+	border-top: 1px solid white;
+	background: white url('/static/images/gradient-greytowhite.png') repeat-x;
+	}
+
+.restore p, .restore fieldset, .restore table, .restore pre {
+	margin-bottom: 1em;	
+	}
+
+.restore h1, .restore h2, .restore h3, .restore h4, .restore h5, .restore h6, .restore strong, .restore dt {
+	font-weight: bold;
+	}
+
+.formcontrols .blockrow.singlecheck label {
+	float: left;	
+	}
+
+.formcontrols .blockrow label.full {
+	width: auto;
+	float: none;
+	font-weight: bold;
+	}
+
+.formcontrols input.button, .actionbuttons {
+	max-width: 100%;
+	}
+	
+.blockfoot, .blocksubfoot {
+	padding: 5px 0px 5px 0px;
+	}
+
+.blockfoot, .blocksubfoot {
+	display: block;
+	clear: both;
+	background: white none;
+	padding: 5px 0px 5px 0px;
+	border: 0 #6C0;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
