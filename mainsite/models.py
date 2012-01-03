@@ -9,8 +9,7 @@ class Ebook (models.Model):
 	description=models.TextField()
 	upload_time=models.DateField(default=datetime.date.today())
 	published_date=models.DateField()
-	ave_rate=models.FloatField()
-
+	avg_rate=models.FloatField()
 	rate_times=models.IntegerField()
 	rates=models.ManyToManyField('UserInfo',through='Rate',related_name='ebook_rate')
 	downloads=models.ManyToManyField('UserInfo',through='Download',related_name='ebook_download')
@@ -20,7 +19,7 @@ class Ebook (models.Model):
 	uploader=models.ForeignKey('UserInfo',related_name='ebook_uploader')
 	slug=models.SlugField(unique=True)
 	image_link=models.URLField()
-	authors=models.ManyToManyField('Author')
+	authors=models.CharField(max_length=300)
 	@models.permalink
 	def get_absolute_url():
 		return ('library.mainsite.views.view',self.slug)	
@@ -28,15 +27,6 @@ class Ebook (models.Model):
 		return self.name
 	def get_model_name(self):
 		return self.__class__.__name__ 
-	
-class Author(models.Model):
-	name = models.CharField(max_length = 100)
-	author_info = models.CharField(max_length = 300, null = True)
-	slug=models.SlugField(unique=True)
-	def get_absolute_url():
-		return ('library.mainsite.views.view',self.slug)
-	def __unicode__(self):
-		return self.name
 	
 class Link(models.Model):
 	download_link=models.URLField()
@@ -95,7 +85,7 @@ class Download(models.Model):
 	download_time=models.DateField(default=datetime.date.today())
 
 class Level(models.Model):
-	CHOICES=(('1','Beginner'),('2','Intermediate'),('3','Advanced'))
+	CHOICES=((1,'Beginner'),(2,'Intermediate'),(3,'Advanced'))
 	category=models.ForeignKey(Category)
 	ebook=models.ForeignKey(Ebook)
 	user=models.ForeignKey(UserInfo)
@@ -107,7 +97,7 @@ class Comment(models.Model):
 	content=models.TextField()
 	
 class Rate(models.Model):
-	CHOICES=(('1','1'),('2','2'),('3','3'),('4','4'),('5','5'))
+	CHOICES=((1,'1'),(2,'2'),(3,'3'),(4,'4'),(5,'5'))
 	user=models.ForeignKey(UserInfo)
 	ebook=models.ForeignKey(Ebook)
 	rate=models.IntegerField(choices=CHOICES)

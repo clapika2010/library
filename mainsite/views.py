@@ -155,9 +155,8 @@ def advanced_search(request):
 	#end delete 
 	if request.method == "POST":	
 		extraFieldForm = ExtraFieldsForm(request.POST)
-		extraFieldForm2 = ExtraFieldsForm2(request.POST)
 		
-		if extraFieldForm.is_valid() and extraFieldForm2.is_valid():
+		if extraFieldForm.is_valid():
 			
 			try:
 				searchKey = extraFieldForm.cleaned_data['title']
@@ -170,14 +169,14 @@ def advanced_search(request):
 				page = 1	
 
 			title = extraFieldForm.cleaned_data['title']
-			subject = request.POST.get('id_subject')
-			category = extraFieldForm2.cleaned_data['category']
-			from_year_publish = extraFieldForm2.cleaned_data['from_year_publish']
-			to_year_publish = extraFieldForm2.cleaned_data['to_year_publish']
-			level = extraFieldForm2.cleaned_data['level']
-			author = extraFieldForm2.cleaned_data['author']
-			from_rate = extraFieldForm2.cleaned_data['from_rate']
-			to_rate = extraFieldForm2.cleaned_data['to_rate']
+			subject = extraFieldForm.cleaned_data['subject']
+			category = extraFieldForm.cleaned_data['category']
+			from_year_publish = extraFieldForm.cleaned_data['from_year_publish']
+			to_year_publish = extraFieldForm.cleaned_data['to_year_publish']
+			level = extraFieldForm.cleaned_data['level']
+			author = extraFieldForm.cleaned_data['author']
+			from_rate = extraFieldForm.cleaned_data['from_rate']
+			to_rate = extraFieldForm.cleaned_data['to_rate']
 			semester = extraFieldForm.cleaned_data['semester']
 					
 			if subject != "":
@@ -185,7 +184,7 @@ def advanced_search(request):
 			if category != "Unknown": 
 			 	result = result.filter(category__name = category)			
 			if author != "Unknown":
-				result = result.filter(authors__name = author)
+				result = result.filter(author__icontains = author)
 			if level != 0:
 				result = result.filter(category__level = level)
 			if from_year_publish != 0:
@@ -211,18 +210,16 @@ def advanced_search(request):
 			
 	else:
 		extraFieldForm = ExtraFieldsForm()
-		extraFieldForm2 = ExtraFieldsForm2()
 		
 	return render_to_response("advanced_search.html", {"subject_semester": subject_semester,
 														"searchResults": searchResults,
 														#delete these line
 														"result": result,
-														"subject": level,
-														"from_year_publish": from_rate,
-														"to_year_publish": to_rate,
+														#"subject": level,
+														#"from_year_publish": from_rate,
+														#"to_year_publish": to_rate,
 														#end delete
-														"extraFieldForm": extraFieldForm,
-														"extraFieldForm2": extraFieldForm2,}, context_instance=RequestContext(request))
+														"extraFieldForm": extraFieldForm,}, context_instance=RequestContext(request))
 
 def search(request):
 	results_per_page = 4
@@ -236,9 +233,9 @@ def search(request):
 	except KeyError:
 		page = 1
 	
-	cate = Category.objects.filter(name__contains = searchKey)
-	sub = Subject.objects.filter(name__contains = searchKey)
-	eb = Ebook.objects.filter(name__contains = searchKey)
+	cate = Category.objects.filter(name__icontains = searchKey)
+	sub = Subject.objects.filter(name__icontains = searchKey)
+	eb = Ebook.objects.filter(name__icontains = searchKey)
 	result_list = list(chain(cate,sub,eb))
 	paginator = Paginator(result_list,results_per_page)
 	

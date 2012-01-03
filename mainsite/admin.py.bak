@@ -1,0 +1,46 @@
+from django.contrib import admin
+from library.mainsite.models import *
+	
+class CommentInline(admin.TabularInline):
+	model=Comment
+	extra=0
+	
+class LinkInline(admin.TabularInline):
+	model=Link
+	extra=0
+	
+class EbookAdmin(admin.ModelAdmin):
+	list_display=['name','authors','upload_time','published_date']
+	prepopulated_fields={'slug':['name']}
+	filter_horizontal=('subject','category')
+	inlines=[CommentInline,LinkInline,]
+	list_filter = ['upload_time']
+	search_fields = ['name']
+	
+class SubjectAdmin(admin.ModelAdmin):
+	list_display=['name','semester','subject_info']
+	prepopulated_fields={'slug':['name']}
+	search_fields = ['name']
+	
+class CategoryAdmin(admin.ModelAdmin):
+	list_display=['name','category_info']
+	prepopulated_fields={'slug':['name']}
+	search_fields = ['name']
+	
+class AuthorAdmin(admin.ModelAdmin):
+	list_display=['name','author_info']
+	prepopulated_fields={'slug':['name']}
+	search_fields = ['name']
+	
+class InfoAdmin(admin.ModelAdmin):
+	list_display=['user','user_info']
+	search_fields = ['name']
+
+admin.site.register(Ebook, EbookAdmin)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Subject, SubjectAdmin)
+admin.site.register(UserInfo, InfoAdmin)
+admin.site.register(Download)
+admin.site.register(Level)
+admin.site.register(Rate)
+admin.site.register(Question)

@@ -1,0 +1,82 @@
+﻿{% extends "base.html" %}
+{% block content %}
+
+<div class="main">
+	<div class="align">
+		<div id="wrapper">
+			<ul class="bookshelf">
+				<!-- ####Cho nay la sach cho ke sach phia tren#### -->
+				<li>
+					{% if book_row_1 %}
+						{% for book in book_row_1 %}
+					<!-- ####for each moi cuon sach trong thu vien, thay hinh no trong cai link o img duoi day#### -->
+					<div class="row_product">
+						<div class="shadow">
+							<img src={{ book.image_link }} alt={{ book.name }} />
+						</div><!-- end shadow -->
+					</div><!-- end row_product -->
+						{% endfor %}
+					{% endif %}
+				</li>
+				<li>
+					{% if book_row_2 %}
+						{% for book in book_row_2 %}
+					<div class="row_product">
+						<div class="shadow">
+							<img src={{ book.image_link }} alt={{ book.name }} />
+						</div><!-- end shadow -->
+					</div><!-- end row_product -->
+						{% endfor %}
+					{% endif %}
+				</li>
+			</ul>
+		</div><!-- end wrapper -->
+	</div><!-- end align -->
+	<div class="content">
+		<div id="wrapper">
+			<div class="right">
+			</div><!-- end right -->
+			<div class="left">
+				<h3><em>Top </em>Downloads</h3>
+				<div class="boxIdent">
+					{% if book_top %}
+						{% for book in book_top %}
+					<div class="books">
+						<img src={{ book.image_link }} alt={{ book.name }} />
+						<div class="name"><a href="" >{{ book.name }}</a></div><!-- end name -->
+						<div class="info">
+							<div class="number">
+								<!-- So lan tai khong biet lay nhu the nao??? -->
+							</div><!-- end number -->
+							<div class="button">
+								<form><input type="submit" class="download" value="Download" />
+								</form>
+							</div><!-- end button -->
+						</div><!-- end info -->
+					</div><!-- end book -->
+						{% endfor %}
+					{% endif %}
+				</div><!-- end boxIdent -->
+				<h3><em>My </em>books</h3>
+				<div class="boxIdent">
+					{% if book_top %}
+						{% for book in book_top %}
+					<div class="books">
+						<img src={{ book.image_link }} alt={{ book.name }} />
+						<div class="name"><a href="" >{{ book.name }}</a></div><!-- end name -->
+						<div class="info">
+							<div class="button">
+								<form><input type="submit" class="download" value="Download" />
+								</form>
+							</div><!-- end button -->
+						</div><!-- end info -->
+					</div><!-- end book -->
+						{% endfor %}
+					{% endif %}
+				</div><!-- end boxIdent -->
+			</div><!-- end left -->
+		</div><!-- end wrapper -->
+	</div><!-- end content -->
+</div><!-- end main -->
+
+{% endblock %}

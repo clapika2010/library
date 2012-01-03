@@ -23,8 +23,9 @@ class ExtraFieldsForm(Form):
 	SEMESTER_CHOICES = ((0, "Unknow"), (1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5"), (6, "6"), 
 						(7, "Optional",))
 	semester = forms.IntegerField(widget=forms.Select(choices=SEMESTER_CHOICES))
+	
+	subject = forms.CharField()
 							
-class ExtraFieldsForm2(Form):
 	CATEGORY_CHOICES = [["Unknown", 'Unknown']]
 	for cate in Category.objects.only('name').order_by('name').distinct('name'):
 		CATEGORY_CHOICES.append([cate, str(cate)])		
@@ -33,10 +34,7 @@ class ExtraFieldsForm2(Form):
 	LEVEL_CHOICES = ((0, "Unknown"), (1, "Beginner"), (2, "Intermediate"), (3, "Advanced"),)
 	level = forms.IntegerField(widget=forms.Select(choices=LEVEL_CHOICES))
 	
-	AUTHOR_CHOICES = [["Unknown", 'Unknown']]
-	for author in Author.objects.only('name').order_by('name').distinct('name'):
-		AUTHOR_CHOICES.append([author, str(author)])
-	author = forms.ChoiceField(choices=AUTHOR_CHOICES)
+	author = forms.CharField()
 	
 	YEAR_CHOICES = [[0, 'Unknown']]
 	year = 1991
