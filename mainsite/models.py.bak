@@ -114,7 +114,7 @@ class Rate(models.Model):
 	
 class Question(models.Model):
 	question = models.CharField(max_length=300)
-	answer = models.CharField(max_length=100)                     
+	answer = models.CharField(max_length=100)
 
 	def __unicode__(self):
 		return "Question "+str(self.id)

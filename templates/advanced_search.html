@@ -1,0 +1,64 @@
+{%extends "base.html"%}
+{%block head%}
+{{block.super}}
+<script>
+	
+</script>
+{%endblock head%}
+
+{%block content%}
+{{block.super}}
+<div id="search_form">
+	<form method = "post" action = "">{%csrf_token%}
+		<fieldset>
+			{{extraFieldForm.as_p}}
+			<a>Subjects: </a> 
+			<input type="text" name="id_subject" id="id_subject"></input><br />
+			
+			{{extraFieldForm2.as_p}}
+		</fieldset>
+		<input type="submit" value="Search"></input>
+	</form>
+</div>
+
+<div id = "search_result">
+	<!--test part -->
+	{{result}} <br/>
+	{{subject}}<br/>
+	{{from_year_publish}}<br/>
+	{{to_year_publish}}<br/>
+	<!--end test part -->
+	<table border ="1">
+		<tr>
+			<th>Type</th>
+			<th>Name</th>
+			<th>Slug</th>
+			<th>Other</th>
+		</tr>
+		{% for searchResult in searchResults.object_list %}
+		<tr>
+			<td>{{searchResult.get_model_name}}</td>
+			<td>{{searchResult.name}}</td>
+			<td><a>{{searchResult.slug}}</a></td>
+			<td><a>{{searchResult.avg_rate}}</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+	<div class="pagination">
+		<span class="step-links">
+			{% if searchResults.has_previous %}
+				<a href="?page={{ searchResults.previous_page_number }}">previous</a>
+			{% endif %}
+
+			<span class="current">
+				Page {{ searchResults.number }} of {{ searchResults.paginator.num_pages }}.
+			</span>
+
+			{% if searchResults.has_next %}
+				<a href="?page={{ searchResults.next_page_number }}">next</a>
+			{% endif %}
+		</span>
+	</div>
+</div>
+
+{%endblock content%}

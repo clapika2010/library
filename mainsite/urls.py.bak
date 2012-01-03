@@ -16,6 +16,4 @@ urlpatterns = patterns('',
 	url(r'^create$','library.mainsite.views.create'),
 	url(r'^search$','library.mainsite.views.search'),
 	url(r'^view/(?P<ebook>\w+/)$','library.mainsite.views.view'),
-	url(r'^advancedsearch$', 'library.mainsite.views.advanced_search'),
-	url(r'^admin/jsi18n/', 'django.views.i18n.javascript_catalog'),
 )
