@@ -23,8 +23,47 @@ class ExtraFieldsForm(Form):
 	SEMESTER_CHOICES = ((0, "Unknow"), (1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5"), (6, "6"), 
 						(7, "Optional",))
 	semester = forms.IntegerField(widget=forms.Select(choices=SEMESTER_CHOICES))
+	
+	SUBJECT0_CHOICES = [['Unknown', 'Unknown']]
+	for sub in Subject.objects.only('name').distinct('name'):
+		SUBJECT0_CHOICES.append([sub, str(sub)])
+	subject0 = forms.ChoiceField(label = "Subject", choices= SUBJECT0_CHOICES)
+	
+	SUBJECT1_CHOICES = [['Unknown', 'Unknown']]
+	for sub in Subject.objects.filter(semester = 1).only('name').distinct('name'):
+		SUBJECT1_CHOICES.append([sub, str(sub)])
+	subject1 = forms.ChoiceField(label = "Subject", choices= SUBJECT1_CHOICES)
+	
+	SUBJECT2_CHOICES = [['Unknown', 'Unknown']]
+	for sub in Subject.objects.filter(semester = 2).only('name').distinct('name'):
+		SUBJECT2_CHOICES.append([sub, str(sub)])
+	subject2 = forms.ChoiceField(label = "Subject", choices= SUBJECT2_CHOICES)
+	
+	SUBJECT3_CHOICES = [['Unknown', 'Unknown']]
+	for sub in Subject.objects.filter(semester = 3).only('name').distinct('name'):
+		SUBJECT3_CHOICES.append([sub, str(sub)])
+	subject3 = forms.ChoiceField(label = "Subject", choices= SUBJECT3_CHOICES)
+	
+	SUBJECT4_CHOICES = [['Unknown', 'Unknown']]
+	for sub in Subject.objects.filter(semester = 4).only('name').distinct('name'):
+		SUBJECT4_CHOICES.append([sub, str(sub)])
+	subject4 = forms.ChoiceField(label = "Subject", choices= SUBJECT4_CHOICES)
+	
+	SUBJECT5_CHOICES = [['Unknown', 'Unknown']]
+	for sub in Subject.objects.filter(semester = 5).only('name').distinct('name'):
+		SUBJECT5_CHOICES.append([sub, str(sub)])
+	subject5 = forms.ChoiceField(label = "Subject", choices= SUBJECT5_CHOICES)
+	
+	SUBJECT6_CHOICES = [['Unknown', 'Unknown']]
+	for sub in Subject.objects.filter(semester = 6).only('name').distinct('name'):
+		SUBJECT6_CHOICES.append([sub, str(sub)])
+	subject6 = forms.ChoiceField(label = "Subject", choices= SUBJECT6_CHOICES)
+	
+	SUBJECT7_CHOICES = [['Unknown', 'Unknown']]
+	for sub in Subject.objects.filter(semester = 7).only('name').distinct('name'):
+		SUBJECT7_CHOICES.append([sub, str(sub)])
+	subject7 = forms.ChoiceField(label = "Subject", choices= SUBJECT7_CHOICES)
 							
-class ExtraFieldsForm2(Form):
 	CATEGORY_CHOICES = [["Unknown", 'Unknown']]
 	for cate in Category.objects.only('name').order_by('name').distinct('name'):
 		CATEGORY_CHOICES.append([cate, str(cate)])		
@@ -33,10 +72,7 @@ class ExtraFieldsForm2(Form):
 	LEVEL_CHOICES = ((0, "Unknown"), (1, "Beginner"), (2, "Intermediate"), (3, "Advanced"),)
 	level = forms.IntegerField(widget=forms.Select(choices=LEVEL_CHOICES))
 	
-	AUTHOR_CHOICES = [["Unknown", 'Unknown']]
-	for author in Author.objects.only('name').order_by('name').distinct('name'):
-		AUTHOR_CHOICES.append([author, str(author)])
-	author = forms.ChoiceField(choices=AUTHOR_CHOICES)
+	author = forms.CharField()
 	
 	YEAR_CHOICES = [[0, 'Unknown']]
 	year = 1991
@@ -46,7 +82,7 @@ class ExtraFieldsForm2(Form):
 		year+=1
 	
 	from_year_publish = forms.IntegerField(widget=forms.Select(choices=YEAR_CHOICES))
-	to_year_publish = forms.IntegerField(widget=forms.Select(choices=YEAR_CHOICES))
+	to_year_publish = forms.IntegerField( widget=forms.Select(choices=YEAR_CHOICES),initial=[MAX_YEAR, str(MAX_YEAR)])
 	
 	RATE_CHOICES = ((0, "Unknown"), (1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5'))
 	from_rate = forms.IntegerField(widget=forms.Select(choices=RATE_CHOICES))

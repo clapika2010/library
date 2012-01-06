@@ -83,7 +83,17 @@
 	</form>
 </div>
 
-<div id = "search_result">	
+<div id = "search_result">
+	<!--test part -->
+	{{result}} <br/>
+	{{subject}}<br/>
+	{{from_year_publish}}<br/>
+	{{to_year_publish}}<br/>
+	
+	<!--<div id = "subject_semester" >{{subject_semester}}</div>
+	<input type="text" value ="{{subject_semester1}}"></input>-->
+	<!--end test part -->
+	
 	<table border ="1">
 		<tr>
 			<th>Type</th>

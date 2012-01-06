@@ -10,6 +10,7 @@ from django.core.mail import send_mail, BadHeaderError
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count
 import random
+from django.core import serializers
 from itertools import chain
 import datetime
 
@@ -145,14 +146,8 @@ def create(request):
 def advanced_search(request):
 	searchResults = None
 	results_per_page = 5
-	subject_semester = Subject.objects.all().order_by('semester','name').values('semester','name')
 	result = Ebook.objects.all()
-	#delete these line
-	subject = ""
-	author= "Unknown"
-	#from_rate = 0
-	#to_rate = 0
-	#end delete 
+
 	if request.method == "POST":	
 		extraFieldForm = ExtraFieldsForm(request.POST)
 		
@@ -179,7 +174,7 @@ def advanced_search(request):
 			to_rate = extraFieldForm.cleaned_data['to_rate']
 			semester = extraFieldForm.cleaned_data['semester']
 					
-			if subject != "":
+			if subject != "Unknown":
 				result = result.filter(subject = subject)
 			if category != "Unknown": 
 			 	result = result.filter(category__name = category)			
@@ -211,15 +206,7 @@ def advanced_search(request):
 	else:
 		extraFieldForm = ExtraFieldsForm()
 		
-	return render_to_response("advanced_search.html", {"subject_semester": subject_semester,
-														"searchResults": searchResults,
-														#delete these line
-														"result": result,
-														#"subject": level,
-														#"from_year_publish": from_rate,
-														#"to_year_publish": to_rate,
-														#end delete
-														"extraFieldForm": extraFieldForm,}, context_instance=RequestContext(request))
+	return render_to_response("advanced_search.html", {"searchResults": searchResults,"extraFieldForm": extraFieldForm,}, context_instance=RequestContext(request))
 
 def search(request):
 	results_per_page = 4

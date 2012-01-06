@@ -51,7 +51,7 @@ class Category(models.Model):
 		return self.__class__.__name__ 
 		
 class Subject(models.Model):
-	CHOICES=(('1','1'),('2','2'),('3','3'),('4','4'),('5','5'),('6','6'),('7','7'),)
+	CHOICES=((1,'1'),(2,'2'),(3,'3'),(4,'4'),(5,'5'),(6,'6'),(7,'7'),)
 	name=models.CharField(max_length=100,primary_key=True)
 	subject_info=models.CharField(max_length=300)
 	semester=models.IntegerField(choices=CHOICES)
