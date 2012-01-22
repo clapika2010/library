@@ -12,7 +12,6 @@ class LinkInline(admin.TabularInline):
 class EbookAdmin(admin.ModelAdmin):
 	list_display=['name','authors','upload_time','published_date']
 	prepopulated_fields={'slug':['name']}
-	filter_horizontal=('subject','category')
 	inlines=[CommentInline,LinkInline,]
 	list_filter = ['upload_time']
 	search_fields = ['name']
@@ -35,7 +34,7 @@ admin.site.register(Ebook, EbookAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Subject, SubjectAdmin)
 admin.site.register(UserInfo, InfoAdmin)
+admin.site.register(Major)
 admin.site.register(Download)
-admin.site.register(Level)
 admin.site.register(Rate)
 admin.site.register(Question)

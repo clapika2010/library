@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="/static/css/subject.css">
+<link rel="stylesheet" type="text/css"
+      href="{{STATIC_URL}}css/sunny/jquery-ui-1.8.17.custom.css">
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript"
+        src="{{STATIC_URL}}js/jquery-ui-1.8.17.custom.min.js"></script>
+<script>
+	$(function() {
+		$( "#accordion" ).accordion();
+	});
+</script>
+<div class="subject">
+<div id="wrapperforsub">
+			<div id="accordion">
+				{% for major in majors %}
+				<h3><a href="#">{{major.name}}</a></h3>
+				<div>
+	 			<ul class="show-list">
+				{% for cate in major.category_set.all%}
+					<li><a href="/category/{{cate.slug}}" >{{cate.name}}</a></li>
+				{% endfor %}
+				</ul>
+				</div>
+				{% endfor %}
+			</div><!-- end one-col -->
+</div><!-- end wrapper -->
+</div>
+
+{% endblock %}

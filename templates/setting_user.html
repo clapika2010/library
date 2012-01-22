@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{%block head%}
+{{block.super}}
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$('#current_pass').blur(function(){
+			$(".error").hide();
+			if ($('#current_pass').val() ==''){
+				$("#current_pass").after('<span class="error" style="color:red; font-size:13px">Please enter your current password.</span>');
+				return false;
+			}
+		});
+		$('#pass1').blur(function(){
+			$(".error").hide();
+			if ($("#pass1").val() == '' && $('#pass').val() != ''){
+				$("#pass1").after('<span class="error" style="color:red; font-size:13px">Please re-enter your password.</span>');
+				return false;
+			}
+			else if ($("#pass").val() != $("#pass1").val()){
+				$("#pass1").after('<span class="error" style="color:red; font-size:13px">Passwords do not match.</span>');
+				return false;
+			}
+		});
+		$('#email1').blur(function(){
+			$(".error").hide();
+			if ($("#email1").val() == '' && $('#email').val() != ''){
+				$("#email1").after('<span class="error" style="color:red; font-size:13px">Please re-enter your email.</span>');
+				return false;
+			}
+			else if ($("#email").val() != $("#email1").val()){
+				$("#email1").after('<span class="error" style="color:red; font-size:13px">Emails do not match.</span>');
+				return false;
+			}
+		});
+	});	
+</script>
+{%endblock head%}
+
+{% block content %}
+<div id="wrapperforregister">
+	<div class="register">
+		<form id="" action="" name="" class="vbform block" method="post">
+			<h2 class="blockhead">Setting</h2>
+			<div class="blockbody formcontrols">
+				<div class="section">		
+					{%if errors%}
+					<div class ="blockrow">
+						<p style="color:red; font-size:13px">{{errors}}</p>
+					</div>
+					{%endif%}
+					<div class ="blockrow">
+						<ul class = "group">
+							<li>
+								<label for="">Current Password:</label>
+								<input type="password" class="textbox" name="current_password" id="current_pass" maxlength="50" tabindex="1" />
+							</li>
+						</ul>						
+					</div>
+					<div class="blockrow">
+						<ul class="group">	
+							<!-- #######################Xu ly password o day############################# -->
+							<li>
+								<label for="">New Password:</label>
+								<input type="password" class="textbox" name="new_password" id="pass"	maxlength="50" tabindex="1" />
+							</li>
+							<li>
+								<label for="">Confirm new password:</label>
+								<input type="password" class="textbox" name="new_password1" id="pass1" maxlength="50" tabindex="1" />
+							</li>
+							<p class="description">Please choose a password for your account<br>
+								<b>Note:</b> Password is distinguished by lower case and upper case
+							</p>
+						</ul>
+						
+					</div><!-- end blockrow -->
+					<div class="blockrow">
+						<ul class="group">
+							<!-- ########################## Xu ly email o day #############################3 -->
+							<li>
+								<label for="">Email:</label>
+								<input type="email" class="textbox" name="email" id="email"	maxlength="50" tabindex="1" />
+							</li>
+							<li>
+								<label for="">Confirm email:</label>
+								<input type="email" class="textbox" name="email1" id="email1" maxlength="50" tabindex="1" />
+							</li>
+							<p class="description">Please fill in your email address.</p>
+						</ul>
+					</div><!-- end blockrow -->
+					
+				</div><!-- end section -->
+			</div><!-- end blockbody formcontrol -->			
+			<div class="blockfoot actionbuttons">
+				<div class="group">
+					<input type="submit" class="button" value="Submit" tabindex="1" />
+					<input type="reset" class="button" value="Cancel" tabindex="2" />
+				</div><!-- end group -->
+			</div><!-- end blockfoot -->
+		</form>
+	</div>
+</div>
+{% endblock %}		

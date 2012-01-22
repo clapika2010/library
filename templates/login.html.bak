@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div id="wrappererr">
+<div class="standard_error">
+	<h2 class="blockhead">Notice from Administrator</h2>
+	<form class="block vbform" method="post" action="/login">
+		<div class="blockbody formcontrols">
+			<div>
+				You have entered an invalid username or password. 
+				Please enter the correct details and try again. 
+				Don't forget that the password is case sensitive. 
+				Forgotten your password? Click <a href="">here!</a>
+			</div><!-- end restore -->
+			<p >You must <a href="/register" >register</a> before enter this!
+			</p>
+			<h3 class="blocksubhead">Login</h3>
+			<div class="blockrow">
+				<label for="">Name:</label>
+				<input type="text" class="primary textbox" id="" name="username" tabindex="1" />
+			</div><!-- end blockrow -->
+			<div class="blockrow">
+				<label for="">Password:</label>
+				<input type="password" class="primary textbox" id="" name="password" tabindex="1" />				
+			</div><!-- end blockrow -->
+			<div>
+				<input type="checkbox" name="" id="" value="" tabindex="1" >Remember?</input>
+			</div><!-- single check -->
+		</div><!-- end blockbody form -->
+		<div class="blockfoot actionbuttons">
+			<div class="group">
+				<input type="submit" class="" value="Login" tabindex="1" />
+				<input type="reset" class="" value="Cancel" tabindex="1" />
+			</div><!-- end group -->
+		</div><!-- button -->
+	</form>
+</div><!-- end error -->
+</div><!-- end wrapper -->
+
+{% endblock %}

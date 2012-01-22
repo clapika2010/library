@@ -2,26 +2,44 @@ from django.forms import ModelForm, Form
 from django import forms
 from django.forms.widgets import HiddenInput
 from library.mainsite.models import *
+from django.contrib.admin.widgets import FilteredSelectMultiple, AdminDateWidget
+from django.conf import settings
+from django.utils.safestring import mark_safe
 
 class EbookForm(ModelForm):
+	subject=forms.ModelChoiceField(Subject.objects.all(),widget=FilteredSelectMultiple("Subjects", False,attrs={'rows':'20'}),required=False)
 	class Meta:
 		model=Ebook
-		exclude=('slug','upload_time','uploader','comments','rates','downloads','ave_rate','rate_times')
-		
+		exclude=('slug','upload_time','uploader','comments','rates','downloads','avg_rate','rate_times','image_link','isbn')
+	def __init__(self, *args, **kwargs):
+		super(EbookForm, self).__init__(*args, **kwargs)
+		self.fields['published_date'].widget=AdminDateWidget()
+	
 class UploadForm(ModelForm):
+	subject=forms.ModelMultipleChoiceField(Subject.objects.all(),widget=FilteredSelectMultiple("Subjects", False,attrs={'rows':'20'}),required=False)
 	class Meta:
 		model=Ebook
-		fields=('name','description','category','subject','published_date','authors')
+		fields=('name','description','subject','category','level','published_date','authors','isbn','uploader','slug','image_link')
 	def __init__(self, *args, **kwargs):
 		super(UploadForm, self).__init__(*args, **kwargs)
 		self.fields['published_date'].widget=HiddenInput()
 		self.fields['authors'].widget=HiddenInput()
-				
+		self.fields['isbn'].widget=HiddenInput()
+		self.fields['uploader'].widget=HiddenInput()
+		self.fields['slug'].widget=HiddenInput()
+		self.fields['image_link'].widget=HiddenInput()
+	
+class LinkForm(ModelForm):
+	class Meta:
+		model=Link
+		exclude=('is_alive','ebook')
+	def __init__(self, *args, **kwargs):
+		super(LinkForm,self).__init__(*args, **kwargs)
+		self.fields['download_link'].label="Download Link"
+	
 class ExtraFieldsForm(Form):
 	title = forms.CharField(max_length = 100, required = False)
-	
-	SEMESTER_CHOICES = ((0, "Unknow"), (1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5"), (6, "6"), 
-						(7, "Optional",))
+	SEMESTER_CHOICES = ((0, "Unknown"), (1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5"), (6, "6"),(7, "Optional",))
 	semester = forms.IntegerField(widget=forms.Select(choices=SEMESTER_CHOICES))
 	
 	SUBJECT0_CHOICES = [['Unknown', 'Unknown']]

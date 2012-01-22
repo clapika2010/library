@@ -1,6 +1,7 @@
 {%extends "base.html"%}
 {%block head%}
 {{block.super}}
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 <script>
 	$(document).ready(function(){
 	 	$('#id_to_year_publish').change(function(){
@@ -73,48 +74,131 @@
 
 {%block content%}
 {{block.super}}
-
-<div id="search_form">
+<div id="content">
+	<div id="wrapper">
+	<h1>Upload book</h1>
+	<div id="content-main">
+	<form id="result" action="/upload" method="post"> 
+			<fieldset class="module aligned">
+<div class="form-row">
 	<form method = "post" action = "">{%csrf_token%}
 		<fieldset>
 			{{extraFieldForm.as_p}}
 		</fieldset>
-		<input type="submit" value="Search"></input>
 	</form>
 </div>
-
-<div id = "search_result">	
-	<table border ="1">
-		<tr>
-			<th>Type</th>
-			<th>Name</th>
-			<th>Slug</th>
-			<th>Other</th>
-		</tr>
-		{% for searchResult in searchResults.object_list %}
-		<tr>
-			<td>{{searchResult.get_model_name}}</td>
-			<td>{{searchResult.name}}</td>
-			<td><a>{{searchResult.slug}}</a></td>
-			<td><a>{{searchResult.avg_rate}}</a></td>
-		</tr>
-		{% endfor %}
-	</table>
-	<div class="pagination">
-		<span class="step-links">
-			{% if searchResults.has_previous %}
-			<a href="?page={{ searchResults.previous_page_number }}">previous</a>
-			{% endif %}
-			
-			<span class="current">		
-				Page {{ searchResults.number }} of {{ searchResults.paginator.num_pages }}.
-			</span>
-			
-			{% if searchResults.has_next %}
-			<a href="?page={{ searchResults.next_page_number }}">next</a>
-			{% endif %}
-		</span>
-	</div>
+	</fieldset>
+			<div class="submit-row">
+				<input type="submit" value="Search" class="default" name="" />
+			</div><!-- submit -->
+	</form>
+		</div><!-- end content-main -->
+	<div id="wrapper">
+		<div class="right"></div><!-- end right -->
+		<div class="left">
+			<h3>Result</h3>
+			<div class="orderby_form">
+				<form>
+					"Sort by: "
+					<select class="inputbox">
+						<option value="product_list">Select</option>
+						<option value="product_name">Product Name</option>
+					</select>
+				</form>
+			</div><!-- end orderby_form -->
+			<div class="product_list">
+				{% if results.object_list %}
+					{% for result in results.object_list %}
+					{% if result.get_model_name == "Ebook"%}
+				<div class="odd">
+					<div class="browse_1">
+						<div class="separator">	
+							<div class="floatElementR">
+								<div class="browseAddToCartContainer">
+									<div class="button"><p>Download</p></div>
+								</div>
+							</div><!-- end elementR -->
+							<div class="productImg">
+								<img class="star" src={{ result.image_link }} alt={{ result.name }} />
+							</div><!-- end productImg -->
+							<div class="floatElement">
+								<h2 class="title">{{ result.name }}</h2>
+								<div class="description">{{result.description|truncatewords:30}}</div><!-- end description -->
+								<div class="rating">
+									<img src="/static/images/star.png" alt="" />
+									<strong>Total votes:</strong>			
+								</div><!-- end rating -->
+								<div class="detail">
+									<a href="" class="details">Book details</a>
+								</div><!-- end detail -->
+							</div><!-- end floatElement -->
+						</div><!-- end separator -->
+					</div><!-- end browse -->
+				</div><!-- end odd -->
+					{% endif %}
+					{% if result.get_model_name == "Category"%}
+					<div class="odd">
+					<div class="browse_1">
+						<div class="separator">	
+							<div class="floatElementR">
+								<div class="browseAddToCartContainer">
+									<div class="button"><p>Browse</p></div>
+								</div>
+							</div><!-- end elementR -->
+							<div class="productImg">
+								<img class="star" src={{ result.image_link }} alt={{ result.name }} />
+							</div><!-- end productImg -->
+							<div class="floatElement">
+								<h2 class="title">{{ result.name }}</h2>
+								<div class="description">{{ result.category_info|truncatewords:30 }}</div><!-- end description -->
+								<div class="detail">
+									<a href="" class="details">Total: {{result.count}} books</a>
+								</div><!-- end detail -->
+							</div><!-- end floatElement -->
+						</div><!-- end separator -->
+					</div><!-- end browse -->
+				</div><!-- end odd -->
+					{% endif %}
+					{% if result.get_model_name == "Subject"%}
+					<div class="odd">
+					<div class="browse_1">
+						<div class="separator">	
+							<div class="floatElementR">
+								<div class="browseAddToCartContainer">
+									<div class="button"><p>Browse</p></div>
+								</div>
+							</div><!-- end elementR -->
+							<div class="productImg">
+								<img class="star" src={{ result.image_link }} alt={{ result.name }} />
+							</div><!-- end productImg -->
+							<div class="floatElement">
+								<h2 class="title">{{ result.name }}</h2>
+								<div class="description">{{ result.subject_info|truncatewords:30 }}</div><!-- end description -->
+								<div class="detail">
+									<a href="" class="details">Total: {{result.count}} books</a>
+								</div><!-- end detail -->
+							</div><!-- end floatElement -->
+						</div><!-- end separator -->
+					</div><!-- end browse -->
+				</div><!-- end odd -->
+					{% endif %}
+					{% endfor %}
+				{% endif %}
+			</div><!-- end product_list -->
+			<div class="pagination">
+				<span class="step-links">
+				{% if results.has_previous %}
+					<a href="?page={{ searchResults.previous_page_number }}">previous</a>
+				{% endif %}
+				<span class="current">
+					Page {{ results.number }} of {{ results.paginator.num_pages }}.
+				</span>
+				{% if results.has_next %}
+					<a href="?page={{ results.next_page_number }}">next</a>
+				{% endif %}
+				</span>
+			</div>
+		</div><!-- end left -->
+	</div><!-- end wrapper -->
 </div>
-
 {%endblock content%}					

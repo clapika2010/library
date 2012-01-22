@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="/static/css/subject.css">
+<link rel="stylesheet" type="text/css"
+      href="{{STATIC_URL}}css/sunny/jquery-ui-1.8.17.custom.css">
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript"
+        src="{{STATIC_URL}}js/jquery-ui-1.8.17.custom.min.js"></script>
+<script>
+	$(function() {
+		$( "#accordion" ).accordion();
+	});
+</script>
+<style>
+	li.sub{
+		font-size:17px;
+		margin:10px;
+	}
+</style>
+<div class="subject">
+	<div id="wrapperforsub">
+			<div id="accordion">
+			<h3><a href="#">Semester 1</a></h3>
+				<div>
+					<ul class="show-list">
+						{% for i in s1 %}
+							<li class="sub"><a href="/subject/{{i.slug}}">{{i.name}}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			<h3><a href="#">Semester 2</a></h3>
+				<div>
+					<ul class="show-list">
+						{% for i in s2 %}
+							<li class="sub"><a href="/subject/{{i.slug}}">{{i.name}}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			<h3><a href="#">Semester 3</a></h3>
+				<div>
+					<ul class="show-list">
+						{% for i in s3 %}
+							<li class="sub"><a href="/subject/{{i.slug}}">{{i.name}}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			<h3><a href="#">Semester 4</a></h3>
+				<div>
+					<ul class="show-list">
+						{% for i in s4 %}
+							<li class="sub"><a href="/subject/{{i.slug}}">{{i.name}}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			<h3><a href="#">Semester 5</a></h3>
+				<div>
+					<ul class="show-list">
+						{% for i in s5 %}
+							<li class="sub"><a href="/subject/{{i.slug}}">{{i.name}}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			<h3><a href="#">Semester 6</a></h3>
+				<div>
+					<ul class="show-list">
+						{% for i in s6 %}
+							<li class="sub"><a href="/subject/{{i.slug}}">{{i.name}}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			<h3><a href="#">Optional Subjects</a></h3>
+				<div>
+					<ul class="show-list">
+						{% for i in s7 %}
+							<li class="sub"><a href="/subject/{{i.slug}}">{{i.name}}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			
+	</div><!-- end wrapper -->
+</div><!-- end subject -->
+
+{% endblock %}

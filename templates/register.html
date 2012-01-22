@@ -1,97 +1,155 @@
 {% extends "base.html" %}
+{%block head%}
+{{block.super}}
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$('#pass').blur(function(){
+			$(".error").hide();
+			if ($("#pass").val() == ''){
+				$("#pass").after('<span class="error" style="color:red; font-size:13px">Please enter your password.</span>');
+				return false;
+		});
+		$('#pass1').blur(function(){
+			$(".error").hide();
+			if ($("#pass1").val() == ''){
+				$("#pass1").after('<span class="error" style="color:red; font-size:13px">Please re-enter your password.</span>');
+				return false;
+			}
+			else if ($("#pass").val() != $("#pass1").val()){
+				$("#pass1").after('<span class="error" style="color:red; font-size:13px">Passwords do not match.</span>');
+				return false;
+			}
+		});
+		$('#email').blur(function(){
+			$(".error").hide();
+			if ($("#email").val() == ''){
+				$("#email").after('<span class="error" style="color:red; font-size:13px">Please enter your email.</span>');
+				return false;
+			}
+		});
+		$('#email1').blur(function(){
+			$(".error").hide();
+			if ($("#email1").val() == ''){
+				$("#email1").after('<span class="error" style="color:red; font-size:13px">Please re-enter your email.</span>');
+				return false;
+			}
+			else if ($("#email").val() != $("#email1").val()){
+				$("#email1").after('<span class="error" style="color:red; font-size:13px">Emails do not match.</span>');
+				return false;
+			}
+		});
+		
+		$('#form').submit(function(){
+			if (!$('#accept').attr('checked')){
+				alert('Please accept the rules to continue or move to another place.');
+				return false;
+			}
+		});
+	});
+	
+</script>
+{%endblock head%}
 {% block content %}
 
-
-<div class="register"><div id="wrapper">
-<form id="" action="" name="" class="vbform block">
-	<h2 class="blockhead">Register</h2>
-	<div class="blockbody formcontrols">
-		<h3 class="blocksubhead">Required Information</h3>
-		<div class="section">
-			<div class="blockrow">
-				<ul class="group">
-					<!-- ######################Xu ly user name o day########################### -->
-					<label for="">User name:</label>
-					<div class="rightcol">
-						<input class="primary textbox" id="" type="text" name="" maxlength="16" value="" tabindex="1"/>
-						<div class="primary" style="display:none;"></div>
-						<p class="description">Please enter your username</p>
-					</div><!-- end rightcol -->
-				</ul>
-			</div><!-- end blockrow -->
-			<div class="blockrow">
-				<ul class="group">
-					<!-- #######################Xu ly password o day############################# -->
-					<li>
-						<label for="">Password:</label>
-						<input type="password" class="textbox" name="" id=""	maxlength="50" tabindex="1" />
-					</li>
-					<li>
-						<label for="">Confirm password:</label>
-						<input type="password" class="textbox" name="" id="" maxlength="50" tabindex="1" />
-					</li>
-				</ul>
-				<p class="description">Please choose a password for your account<br>
-					<b>Note: </b>password is distinguished by lower case and upper case
-				</p>
-			</div><!-- end blockrow -->
-			<div class="blockrow">
-				<ul class="group">
-					<!-- ########################## Xu ly email o day #############################3 -->
-					<li>
-						<label for="">Email:</label>
-						<input type="password" class="textbox" name="" id=""	maxlength="50" tabindex="1" />
-					</li>
-					<li>
-						<label for="">Confirm email:</label>
-						<input type="password" class="textbox" name="" id="" maxlength="50" tabindex="1" />
-					</li>
-				</ul>
-				<p class="description">Please fill in your email address.</p>
-			</div><!-- end blockrow -->
-			<div class="blockrow">
-				<ul class="group">
-					<!-- ############################# Cau hoi random o day ######################### -->
-					<label for="">Question:</label>
-					<input type="text" class="textbox" name="" id="" maxlength="50" tabindex="1" />
-					<p class="description">Cho cau hoi vo day nha bac Nhan</p>
-				</ul>
-			</div><!-- end blockrow -->
-		</div><!-- end section -->
-	</div><!-- end blockbody formcontrol -->
-	<h2 class="blockhead">Rules</h2>
-	<div class="blockbody formcontrols">
-		<div class="section">
-			<div class="blockrow">
-				<p class="label">You should read and agreed to accept the registration terms when registering Forum</p>
-				<div id="rules" class="restore">
-					<p><strong>Instruction rules</strong></p>
-					<p>Registration to this forum is free! We do insist that you abide by the rules and policies detailed
-below. If you agree to the terms, please check the 'I agree' checkbox and press the 'Complete Registration' button below.
-If you would like to cancel the registration, click <a href="/home" >here</a> to return to the home page.</p>
-					<p><strong>Rule star here</strong></p>
-					<p>Please take a minute to read the rules and regulations of the board.</p>
-					<p><b>
-						<font color="#FF0000">Neu 1 so luat o day cho tui no biet!!!</font>
-					</b></p>
-					<p>Noi lam nham o day de nhan manh vai thu</p>
-					<p>Ket luan cho vui o day vai dong</p>
-				</div><!-- end rule -->
-			</div><!-- end blockrow -->
-			<div class="blockrow singlecheck">
-				<label for="" class="full">
-					<input type="checkbox" name="" id="" tabindex="1" value="1" />
-					<strong>I have read and agree to abide by the terms of registration.</strong>
-				</label>
-			</div><!-- end singlecheck -->
-		</div><!-- end section -->
-	</div><!-- end blockbody formcontrols -->
-	<div class="blockfoot actionbuttons">
-		<div class="group">
-			<input type="submit" class="button" value="Register" tabindex="1" />
-			<input type="reset" class="button" value="Cancel" tabindex="1" />
-		</div><!-- end group -->
-	</div><!-- end blockfoot -->
-</form>
-</div></div>
-{% endblock %}
+<div id="wrapperforregister">
+	<div class="register">
+		<form id="form" action="/register" name="" class="vbform block" method="post">
+			<h2 class="blockhead">Register</h2>
+			<div class="blockbody formcontrols">
+				<h3 class="blocksubhead">Required Information</h3>
+				<div class="section">
+					<p style="color:red; font-size:13px">{{errors}}</p>
+					<div class="blockrow">
+						<ul class="group">
+							<!-- ######################Xu ly user name o day########################### -->
+							<label for="">User name:</label>
+							<div class="rightcol">
+								<input class="primary textbox" id="" type="text" name="username" maxlength="16" value="" tabindex="1"/>
+								<div class="primary" style="display:none;"></div>
+								<p class="description">Please enter your username</p>
+							</div><!-- end rightcol -->
+						</ul>
+					</div><!-- end blockrow -->
+					<div class="blockrow">
+						<ul class="group">
+							<!-- #######################Xu ly password o day############################# -->
+							<li>
+								<label for="">Password:</label>
+								<input type="password" class="textbox" name="password" id="pass"	maxlength="50" tabindex="1" />
+							</li>
+							<li>
+								<label for="">Confirm password:</label>
+								<input type="password" class="textbox" name="password1" id="pass1" maxlength="50" tabindex="1" />
+							</li>
+							<p class="description">Please choose a password for your account<br>
+								<b>Note:</b> Password is distinguished by lower case and upper case
+							</p>
+						</ul>
+						
+					</div><!-- end blockrow -->
+					<div class="blockrow">
+						<ul class="group">
+							<!-- ########################## Xu ly email o day #############################3 -->
+							<li>
+								<label for="">Email:</label>
+								<input type="email" class="textbox" name="email" id="email"	maxlength="50" tabindex="1" />
+							</li>
+							<li>
+								<label for="">Confirm email:</label>
+								<input type="email" class="textbox" name="email1" id="email1" maxlength="50" tabindex="1" />
+							</li>
+							<p class="description">Please fill in your email address.</p>
+						</ul>
+					</div><!-- end blockrow -->
+					<div class="blockrow">
+						<ul class="group">
+							<li>
+								<p class="description">{{question}}</p>
+							</li>
+							<!-- ############################# Cau hoi random o day ######################### -->
+							<li>
+								<label for="">Question:</label>
+								<input type="hidden" name="question" value="{{question}}"/>
+								<input type="text" class="textbox" name="answer" id="" maxlength="50" tabindex="1" />
+							</li>
+						</ul>
+					</div><!-- end blockrow -->
+				</div><!-- end section -->
+			</div><!-- end blockbody formcontrol -->
+			<h2 class="blockhead">Rules</h2>
+			<div class="blockbody formcontrols">
+				<div class="section">
+					<div class="blockrow">
+						<p class="label">You should read and agreed to accept the registration terms when registering Forum</p>
+						<div id="rules" class="restore">
+							<p><strong>Instruction rules</strong></p>
+							<p>Registration to this forum is free! We do insist that you abide by the rules and policies detailed
+								below. If you agree to the terms, please check the 'I agree' checkbox and press the 'Complete Registration' button below.
+							If you would like to cancel the registration, click <a href="/home" >here</a> to return to the home page.</p>
+							<p><strong>Rule star here</strong></p>
+							<p>Please take a minute to read the rules and regulations of the board.</p>
+							<p><b>
+								<font color="#FF0000">Neu 1 so luat o day cho tui no biet!!!</font>
+							</b></p>
+							<p>Noi lam nham o day de nhan manh vai thu</p>
+							<p>Ket luan cho vui o day vai dong</p>
+						</div><!-- end rule -->
+					</div><!-- end blockrow -->
+					<div class="blockrow singlecheck">
+						<label for="" class="full">
+							<input type="checkbox" name="" id="accept" tabindex="1" value ="1"/>
+							<strong>I have read and agree to abide by the terms of registration.</strong>
+						</label>
+					</div><!-- end singlecheck -->
+				</div><!-- end section -->
+			</div><!-- end blockbody formcontrols -->
+			<div class="blockfoot actionbuttons">
+				<div class="group">
+					<input type="submit" class="button" value="Register" tabindex="1" />
+					<input type="reset" class="button" value="Cancel" tabindex="1" />
+				</div><!-- end group -->
+			</div><!-- end blockfoot -->
+		</form>
+	</div></div>
+	{% endblock %}						

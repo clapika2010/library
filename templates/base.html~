@@ -1,16 +1,19 @@
-<! DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+﻿<! DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 	<head>
+	{% block head %}
 		<title>{{ title }}</title>
 		<meta http-equiv="Content-Language" content="en" >
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
 		<meta name="description" content="Online library for HCMUT" >
 		<meta name="keywords" content="Books, HCMUT" >
 		<link rel="stylesheet" type="text/css" href="/static/css/style.css" >
+		<link rel="stylesheet" type="text/css" href="/static/css/bonus.css" >
 		<script type="text/javascript" src="/static/scripts/jquery-1.4.2.min.js"></script>
 		<script type="text/javascript" src="/static/scripts/search.js"></script>
 		<script type="text/javascript" src="/static/scripts/ddsmoothmenu.js"></script>
+	{% endblock head%}
 	</head>
 	<body>	
 			<div class="header">
@@ -22,30 +25,34 @@
 							<li>FAQS</li>
 							<li>Contacts</li>
 						</ul>
-						</div>
+						</div><!-- end box -->
 						<div class="toplinks">
 						<!-- neu user chua dang nhap thi hien cai class nouser -->
+						{% if user.is_authenticated %}
+							<ul class="isuser">
+								<li><a href="/logout" >Sign out</a></li>
+								<li><a href="/setting" >Setting</a></li>
+								<li class="welcomelink">Hi, <a href="" >{{user.username}}</a></li>
+							</ul>
+						{% else %}
 							<ul class="nouser">
 								<li>
-									<form>
+									<form action="/login" method="post">
 										<fieldset class="logindetails">
 											<div><div>
-												<input type="text" class="textbox default-value" name="" id="" size="10" tabindex="101" value="Name" onfocus="this.value=''"/>
-												<input type="password" class="textbox" tabindex="102" name="" size="10" value="Password" onfocus="this.value=''"/>
+												<input type="text" class="textbox default-value" name="username" id="" size="10" tabindex="101" value="Name" onfocus="this.value=''"/>
+												<input type="password" class="textbox" tabindex="102" name="password" size="10" value="Password" onfocus="this.value=''"/>
 												<input type="submit" class="loginbutton" tabindex="104" name="" value="Login" />
 											</div></div>
 										</fieldset>
 									</form>
 								</li>
-								<li><a href="" >Register</a></li>
+								<li><a href="/register" >Register</a></li>
 							</ul> 
+						{% endif %}
 						<!-- ket thuc giao dien cho user chua dang nhap -->
 						<!-- neu user da dang nhap thi hien cai giao dien duoi day 
-							<ul class="isuser">
-								<li><a href="" >Sign out</a></li>
-								<li><a href="" >Setting</a></li>
-								<li class="welcomelink">Hi, <a href="" >bkiter09</a></li>
-							</ul>
+							
 						<!-- ket thuc giao dien cho user da dang nhap -->
 						</div><!-- top links -->
 					</div><!-- END wrapper -->
@@ -55,9 +62,9 @@
 						<div class="logo"></div><!-- END logo -->
 						<div class="search_area">
 							<div class="search">
-								<form action="http://127.0.0.1:8000/search" method="GET">
-									<input type="text" name="searchTxt" class="inputbox" maxlength="80" onclick="this.value='';" value="Enter search keywords here" />
-									<input type="submit" class="button" value="" onclick="preCheckSearch(this.form);"/>
+								<form action="/search" method="GET">
+									<input type="text" name="searchTxt" class="inputbox" maxlength="80" value="Enter search keywords here" onfocus="this.value=''"/>
+									<input type="submit" class="button" value="" onclick="preCheckSearch(this.form)"/>
 								</form>
 							</div><!-- END search -->
 						</div><!-- END search -->
@@ -68,10 +75,10 @@
 						<div id="wrapper">
 						<div class="ddsmoothmenu" id="smoothmenu1">
 							<ul class="level1">
-								<li class="level1 item1"><a class="level1 item1" href="">HOME</a></li>
-								<li class="level1 item2"><a class="level1 item2" href="">CATEGORIES</a></li>
+								<li class="level1 item1"><a class="level1 item1" href="/">HOME</a></li>
+								<li class="level1 item2"><a class="level1 item2" href="/category">CATEGORIES</a></li>
 								<li class="level1 item3 parent" style="z-index: 100;">
-									<a class="level1 item3 parent" href="">
+									<a class="level1 item3 parent" href="/subject">
 									<span>SUBJECTS</span>
 									</a>
 									<ul class="level2" style="top:42px;left:0px;width:193px;display:none;visibility:visible;">
@@ -112,19 +119,16 @@
 										</li>
 									</ul>
 								</li>
-								<li class="level1 item4"><a class="level1 item4" href="">UPLOAD</a></li>
+								<li class="level1 item4"><a class="level1 item4" href="/upload">UPLOAD</a></li>
 							</ul>
 						</div><!-- END wrapper -->
 						</div><!-- menu -->
 					</div><!-- END categories -->
 				</div><!-- end row_3 -->
+				</div><!-- END wrapper -->	
 			</div><!-- END header -->
-			
 			{% block content %}
-			
-			
 			{% endblock %}
-			
 			<div class="footer">
 				<div id="wrapper">
 					<div class="content">
@@ -134,7 +138,7 @@
 								<li>FAQS</li>
 								<li>Contacts</li>
 							</ul>
-							<p>Copyright © 2011 Books. All Rights Reserved.</p>
+							<p>Copyright 2011 Books. All Rights Reserved.</p>
 						</div><!-- END left -->
 						<div class="right">
 							<ul>

@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-
 <div class="main">
 	<div class="align">
 		<div id="wrapper">
@@ -12,7 +11,7 @@
 					<!-- ####for each moi cuon sach trong thu vien, thay hinh no trong cai link o img duoi day#### -->
 					<div class="row_product">
 						<div class="shadow">
-							<img src={{ book.image_link }} alt={{ book.name }} />
+							<a href="/view/{{book.slug}}"><img src={{ book.image_link }} alt={{ book.name }} /></a>
 						</div><!-- end shadow -->
 					</div><!-- end row_product -->
 						{% endfor %}
@@ -43,7 +42,7 @@
 						{% for book in book_top %}
 					<div class="books">
 						<img src={{ book.image_link }} alt={{ book.name }} />
-						<div class="name"><a href="" >{{ book.name }}</a></div><!-- end name -->
+						<div class="name"><a href="/view/{{book.slug}}" >{{ book.name }}</a></div><!-- end name -->
 						<div class="info">
 							<div class="number">
 								<!-- So lan tai khong biet lay nhu the nao??? -->
@@ -63,7 +62,7 @@
 						{% for book in book_top %}
 					<div class="books">
 						<img src={{ book.image_link }} alt={{ book.name }} />
-						<div class="name"><a href="" >{{ book.name }}</a></div><!-- end name -->
+						<div class="name"><a href="/view/{{book.slug}}" >{{ book.name }}</a></div><!-- end name -->
 						<div class="info">
 							<div class="button">
 								<form><input type="submit" class="download" value="Download" />

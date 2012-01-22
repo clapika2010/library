@@ -16,7 +16,12 @@
 	margin: 0px;
 	padding: 70px 0 0 60px;
 	}
-	
+
+#wrapperforregister{
+	margin: 0px auto 0px auto;
+	width: 960px;
+}
+
 	.register {
 	max-width: 710px;
 	margin: 0px;
@@ -178,7 +183,6 @@
 
 	fieldset, img {
 	border: 0;
-	border-image: initial;
 	}
 
 .toplinks form input {
@@ -339,7 +343,7 @@ form .rightcol {
 	float: left;
 	}
 
-.formcontrols .blockrow * label {
+.formcontrols .blockrow *  {
 	display: block;
 	margin-bottom: auto;
 	width: auto;
@@ -467,7 +471,7 @@ fieldset {
 
 fieldset {
 	display: block;
-	border: 2px groove threedface;
+	border: 0;
 	}
 
 .form-row {
@@ -568,7 +572,7 @@ input[type="text"], input[type="password"], textarea, select, .vTextField {
 label {
 	font-weight: normal;
 	color: #666;
-	font-size: 12px;
+	font-size: 14px;
 	}
 
 .form-row img, .form-row input {
@@ -617,7 +621,7 @@ a:link, a:visited {
 	}
 
 ul li {
-	list-style-type: square;
+	list-style-type: none;
 	padding: 1px 0;
 	}
 
@@ -670,3 +674,10 @@ li, dt, dd {
 	width: 270px;
 	height: 17.2em;
 	}
+
+#wrappererr {
+	margin: 0px auto 0px auto;
+	width: 960px;
+	height: 460px;
+}
+	

@@ -1,49 +1,32 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="detail">
-	<div id="wrapper">
-		<div class="right"></div><!-- end right -->
-		<div class="left">
-			<h3>Books</h3>
-			<div class="orderby_form">
-				<form>
-					"Sort by: "
-					<select class="inputbox">
-						<option value="product_list">Select</option>
-						<option value="product_name">Product Name</option>
-					</select>
-				</form>
-			</div><!-- end orderby_form -->
-			<div class="product_list">
-				<div class="odd">
-					<div class="browse_1">
-						<div class="separator">	
-							<div class="floatElementR">
-								<div class="browseAddToCartContainer">
-									<div class="button"><p>Download</p></div>
-								</div>
-							</div><!-- end elementR -->
-							<div class="productImg">
-								<img class="star" src="/static/images/demo.png" alt="name" />
-							</div><!-- end productImg -->
-							<div class="floatElement">
-								<h2 class="title">Book name</h2>
-								<div class="description">comment</div><!-- end description -->
-								<div class="rating">
-									<img src="/static/images/star.png" alt="" />
-									<strong>Total votes: 0</strong>			
-								</div><!-- end rating -->
-								<div class="detail">
-									<a href="" class="details">Book details</a>
-								</div><!-- end detail -->
-							</div><!-- end floatElement -->
-						</div><!-- end separator -->
-					</div><!-- end browse -->
-				</div><!-- end odd -->
-			</div><!-- end product_list -->
-		</div><!-- end left -->
-	</div><!-- end wrapper -->
-</div><!-- end detail -->
+<link rel="stylesheet" type="text/css" href="/static/css/subject.css">
+<div class="subject">
+<div id="wrapperforsub">
+	<table summary="" >
+		<td>
+			<div class="one-col">
+	 			<ul class="show-list">
+					<li><a href="" >test1</a></li>
+					<li><a href="" >test2</a></li>
+					<li><a href="" >test3</a></li>
+					<li><a href="" >test4</a></li>
+				</ul>
+			</div><!-- end one-col -->
+		</td>
+		<td>
+			<div class="one-col">
+	 			<ul class="show-list">
+					<li><a href="" >test1</a></li>
+					<li><a href="" >test2</a></li>
+					<li><a href="" >test3</a></li>
+					<li><a href="" >test4</a></li>
+				</ul>
+			</div><!-- end one-col -->
+		</td>
+	</table>
+</div><!-- end wrapper -->
+</div>
 
 {% endblock %}

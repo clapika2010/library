@@ -1,13 +1,52 @@
-<html>
-	<head>
-		<h2>Book information</h2>
-	</head>
-	<body>
-		<form action="/upload/process/" method="post">
-		<table>
-			{{form.as_table}}
-		</table>
-		<input type="submit" value="Submit" />
+{% extends "base.html" %}
+{% block content %}
+<script type="text/javascript" src="/static/admin/js/core.js"></script>
+<script type="text/javascript" src="/static/admin/js/getElementsBySelector.js"></script>
+<script type="text/javascript" src="/static/admin/js/actions.js"></script>
+<script type="text/javascript" src="/static/admin/js/SelectBox.js"></script>
+<script type="text/javascript" src="/static/admin/js/SelectFilter2.js"></script>
+<script type="text/javascript" src="{{STATIC_URL}}scripts/jsi18n.js"></script>
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/style.css" >
+<link rel="stylesheet" type="text/css"
+href="{{STATIC_URL}}css/sunny/jquery-ui-1.8.17.custom.css">
+<script type="text/javascript" src="{{STATIC_URL}}js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript"
+src="{{STATIC_URL}}js/jquery-ui-1.8.17.custom.min.js"></script>
+<script>
+	$(function() {
+		$("#id_published_date").datepicker({ dateFormat: 'yy-mm-dd' });
+		$("#id_published_date").datepicker();
+		
+	});
+</script>
+<style>
+	#id_category, #id_level{
+	background: url('/static/images/default-bg.gif') bottom left repeat-x;
+	width:150px;
+	}
+	#id_published_date{
+	width:150px;
+	}
+	.ui-datepicker{
+	font-size:13px;
+	}
+</style>
+<div id="content">
+	<div id="wrapper">
+		<h1>Upload book</h1>
+		<div id="content-main">
+			<form id="result" action="/create" method="post"> 
+				<fieldset class="module aligned">
+					<table>
+						{{form.as_table}}
+					</table>
+				</form>
+			</fieldset>
+			<div class="submit-row">
+				<input type="submit" value="Upload" class="default" name="" />
+				<input type="reset" value="Reset" class="default" name="" />
+			</div><!-- submit -->
 		</form>
-	</body>
-</html>
+	</div><!-- end content-main -->
+</div><!-- end content -->
+{% endblock %}

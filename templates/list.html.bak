@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="detail">
+	<div id="wrapper">
+		<div class="right"></div><!-- end right -->
+		<div class="left">
+			<h3>Books</h3>
+			<div class="orderby_form">
+				<form>
+					"Sort by: "
+					<select class="inputbox">
+						<option value="product_list">Select</option>
+						<option value="product_name">Product Name</option>
+					</select>
+					<a style="margin-left:300px" href="advanced_search">Advanced Search</a>
+				</form>
+				
+			</div><!-- end orderby_form -->
+			<div class="product_list">
+				{% if results.object_list %}
+					{% for result in results.object_list %}
+					{% if result.get_model_name == "Ebook"%}
+				<div class="odd">
+					<div class="browse_1">
+						<div class="separator">	
+							<div class="floatElementR">
+								<div class="browseAddToCartContainer">
+									<div class="button"><p>Download</p></div>
+								</div>
+							</div><!-- end elementR -->
+							<div class="productImg">
+								<img class="star" src={{ result.image_link }} alt={{ result.name }} />
+							</div><!-- end productImg -->
+							<div class="floatElement">
+								<h2 class="title">{{ result.name }}</h2>
+								<div class="description">{{result.description|truncatewords:30}}</div><!-- end description -->
+								<div class="rating">
+									<img src="/static/images/star.png" alt="" />
+									<strong>Total votes:</strong>			
+								</div><!-- end rating -->
+								<div class="detail">
+									<a href="" class="details">Book details</a>
+								</div><!-- end detail -->
+							</div><!-- end floatElement -->
+						</div><!-- end separator -->
+					</div><!-- end browse -->
+				</div><!-- end odd -->
+					{% endif %}
+					{% if result.get_model_name == "Category"%}
+					<div class="odd">
+					<div class="browse_1">
+						<div class="separator">	
+							<div class="floatElementR">
+								<div class="browseAddToCartContainer">
+									<div class="button"><p>Browse</p></div>
+								</div>
+							</div><!-- end elementR -->
+							<div class="productImg">
+								<img class="star" src={{ result.image_link }} alt={{ result.name }} />
+							</div><!-- end productImg -->
+							<div class="floatElement">
+								<h2 class="title">{{ result.name }}</h2>
+								<div class="description">{{ result.category_info|truncatewords:30 }}</div><!-- end description -->
+								<div class="detail">
+									<a href="" class="details">Total: {{result.count}} books</a>
+								</div><!-- end detail -->
+							</div><!-- end floatElement -->
+						</div><!-- end separator -->
+					</div><!-- end browse -->
+				</div><!-- end odd -->
+					{% endif %}
+					{% if result.get_model_name == "Subject"%}
+					<div class="odd">
+					<div class="browse_1">
+						<div class="separator">	
+							<div class="floatElementR">
+								<div class="browseAddToCartContainer">
+									<div class="button"><p>Browse</p></div>
+								</div>
+							</div><!-- end elementR -->
+							<div class="productImg">
+								<img class="star" src={{ result.image_link }} alt={{ result.name }} />
+							</div><!-- end productImg -->
+							<div class="floatElement">
+								<h2 class="title">{{ result.name }}</h2>
+								<div class="description">{{ result.subject_info|truncatewords:30 }}</div><!-- end description -->
+								<div class="detail">
+									<a href="" class="details">Total: {{result.count}} books</a>
+								</div><!-- end detail -->
+							</div><!-- end floatElement -->
+						</div><!-- end separator -->
+					</div><!-- end browse -->
+				</div><!-- end odd -->
+					{% endif %}
+					{% endfor %}
+				{% endif %}
+			</div><!-- end product_list -->
+			<div class="pagination">
+				<span class="step-links">
+				{% if results.has_previous %}
+					<a href="?page={{ searchResults.previous_page_number }}">previous</a>
+				{% endif %}
+				<span class="current">
+					Page {{ results.number }} of {{ results.paginator.num_pages }}.
+				</span>
+				{% if results.has_next %}
+					<a href="?page={{ results.next_page_number }}">next</a>
+				{% endif %}
+				</span>
+			</div>
+		</div><!-- end left -->
+	</div><!-- end wrapper -->
+</div><!-- end detail -->
+
+{% endblock %}

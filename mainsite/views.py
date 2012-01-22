@@ -3,7 +3,7 @@ from library.mainsite.models import *
 from library.mainsite.forms import *
 from django.shortcuts import render_to_response, redirect
 from django.template.context import RequestContext
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail, BadHeaderError
@@ -13,6 +13,11 @@ import random
 from django.core import serializers
 from itertools import chain
 import datetime
+import logging
+from django.forms.models import inlineformset_factory
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 
 def home(request):
 	book_list = Ebook.objects.all()
@@ -32,7 +37,6 @@ def home(request):
 			book_my =  book_my[0:5]
 	else:
 		book_my=[]
-
 	return render_to_response('home.html',
 	{'title' : 'Home',
 	 'book_row_1' : book_row_1, 'book_row_2' : book_row_2,
@@ -40,100 +44,134 @@ def home(request):
 	 'book_my' : book_my },
 	context_instance = RequestContext(request))
 
-def information(request):
-	#TODO: tra ve cuon sach duoc yeu cau biet thong tin
-	return render_to_response('info.html', 
-	{'title': 'Information'},
-	context_instance = RequestContext(request))
-
-def category(request):
-	book_list = Ebook.objects.all()
-	#TODO: lay sach theo category tra ve book_list
-	return render_to_response('list.html', 
-	{'title': 'Category',
-	 'book_list' : book_list},
-	context_instance = RequestContext(request))
+def category(request,name):
+	if name=="":
+		majors_list=Major.objects.all()
+		return render_to_response('category.html',{'title':'Categories','majors':majors_list},context_instance=RequestContext(request))
+	else:
+		cate=Category.objects.get(name__iexact=name)
+		book_ids=Ebook.objects.filter(category__name__iexact=name)
+		book_list=[i.ebook for i in book_ids]
+		paginator = Paginator(book_list,10)
+		try:
+			page = request.GET['page']
+		except KeyError:
+			page = 1
+		try:
+			results = paginator.page(page)
+		except PageNotAnInteger:
+			results = paginator.page(1)
+		except EmptyPage:
+			results = paginator.page(paginator.num_pages)
+		return render_to_response('list.html', {'title': 'Category '+ cate.name,'results' : results},context_instance = RequestContext(request))
 	
 def subject(request, name):
-	#TODO: tra ve book_list la sach theo chu de la name
-	book_list = list(Ebook.objects.all())
-	return render_to_response('list.html',
-	{'title' : name,
-	 'book_list' : book_list},
-	context_instance = RequestContext(request))
+	if name=="":
+		s1=Subject.objects.filter(semester=1)
+		s2=Subject.objects.filter(semester=2)
+		s3=Subject.objects.filter(semester=3)
+		s4=Subject.objects.filter(semester=4)
+		s5=Subject.objects.filter(semester=5)
+		s6=Subject.objects.filter(semester=6)
+		s7=Subject.objects.filter(semester=7)
+		s8=Subject.objects.filter(semester=8)
+		s9=Subject.objects.filter(semester=9)
+		return render_to_response('subject.html',{'s1':s1,'s2':s2,'s3':s3,'s4':s4,'s5':s5,'s6':s6,'s7':s7,'s8':s8,'s9':s9,'title':'Subjects'},context_instance=RequestContext(request))
+	else:
+		book_list = Ebook.objects.filter(subject__name__iexact=name)
+		paginator = Paginator(book_list,10)
+		try:
+			page = request.GET['page']
+		except KeyError:
+			page = 1
+		try:
+			results = paginator.page(page)
+		except PageNotAnInteger:
+			results = paginator.page(1)
+		except EmptyPage:
+			results = paginator.page(paginator.num_pages)
+		return render_to_response('list.html',{'title' : name,'results' : results},context_instance = RequestContext(request))
 	
 def register(request):
-	errors = []
 	form2=RegisterForm()
-	que = Question.objects.get(id=((int)(random.random()*10))%6+1).question
-	if request.method == 'POST':		
-		form1 = RegisterForm(request.POST)	
-		if form1.is_valid():
+	que = Question.objects.get(id=((int)(random.random()*10))%2+1).question
+	if request.method == 'POST':
+		try:
+			cd = request.POST
+			user = User.objects.get(username=cd['username'])
+		except User.DoesNotExist:
 			try:
-				date = datetime.datetime.now()
-				cd = form1.cleaned_data		
-				users = User.objects.get(username=cd['username'])
-				return redirect("/login")
+				user = User.objects.get(email=cd['email'])
 			except User.DoesNotExist:
-				try:
-					users1 = User.objects.get(email=cd['email'])
-				except User.DoesNotExist:
-					try:		
-						print(request.POST.get('question'))
-						questions = Question.objects.get(answer = request.POST.get('answer'), question= request.POST.get('question'))
-						
-					except Question.DoesNotExist:	
-						errors.append('Answer is wrong')
-						return render_to_response('register.html', {'form': form1, 'errors':errors, 'question':que})						
-					else:
-						p1 = User.objects.create(username=cd['username'],  first_name=cd['firstname'], last_name=cd['lastname'],
-											email = cd['email'], password = cd['password'], is_staff=True, is_active = True, is_superuser= False,
-											last_login=date, date_joined=date)							
-						return render_to_response('login_success.html',{'firstname': p1.first_name,'lastname': p1.last_name })
-						
+				try:		
+					questions = Question.objects.get(question= cd['question'],answer=cd['answer'])
+				except Question.DoesNotExist:	
+					return render_to_response('register.html', {'title':'Register','errors':'Answer is wrong', 'question':que})						
 				else:
-					errors.append('Email: %s is exist' %cd['email'])
-					return render_to_response('register.html', {'form': form1, 'errors':errors,'question': que})
+					p1 = User.objects.create_user(username=cd['username'],email = cd['email'], password = cd['password'])							
+					return render_to_response('notice.html', {'title':'Login', 'error':False},context_instance=RequestContext(request))
 			else:
-				errors.append('Username: %s is exist' %cd['username'])
-				return render_to_response('register.html', {'form': form1, 'errors':errors, 'question':que})
-				
-	else:
-		form1 = RegisterForm()
-	return render_to_response('register.html', {'form': form1, 'errors':errors, 'question': que})
+				return render_to_response('register.html', {'title':'Register','errors':'Email is already in use', 'question':que})
+		else:
+			return render_to_response('register.html', {'title':'Register','errors':'Account already exists', 'question':que})
+	return render_to_response('register.html', {'title':'Register','question': que})
 
-
-def log_in(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-			try:
-				cd = form.cleaned_data
-				users = User.objects.get(username=cd['name'],password=cd['password']) 
-			except User.DoesNotExist:
-				return render_to_response('login.html',{'form':form, 'error': True, 'account':cd['name']})
-			else:
-				users.last_login = datetime.datetime.now()
-				users.save()
-				return render_to_response('login_success.html',{'firstname': users.first_name,'lastname': users.last_name })			
-    else:
-        form = LoginForm()
-    return render_to_response('login_fail.html', {'form': form, 'error':False})
+@login_required(login_url="/login")	
+def setting_user(request):
+	if request.method == "POST":
+		cd = request.POST
+		user = User.objects.get(username = request.user)
+		if user.check_password(cd['current_password']):
+			if cd['new_password'] != '':
+				user.set_password(cd['new_password'])
+			if cd['email'] != '':
+				try:
+					user1 = User.objects.get(email = cd['email'])
+				except User.DoesNotExist:
+					user.email = cd['email']
+				else:
+					return render_to_response('setting_user.html', {'title': 'SettingUser', 'errors': 'Email is already in use'},context_instance=RequestContext(request))
+			user.save()
+			return render_to_response('notice.html', {'title':'Login', 'error':False},context_instance=RequestContext(request))
+		else:
+			return render_to_response('setting_user.html', {'title': 'SettingUser', 'errors': 'The password you gave is incorrect.'},context_instance=RequestContext(request))
+	return render_to_response('setting_user.html', {'title': 'SettingUser'}, context_instance=RequestContext(request))
+		
 	
-def log_out(request):
-	return redirect("/home")		
+def log_in(request):
+	if request.method == 'POST':
+		username=request.POST["username"]
+		password=request.POST["password"]
+		user = authenticate(username=username,password=password)
+		if user is not None:
+			login(request,user)
+			return redirect('/')	
+	return render_to_response('login_fail.html', {'title':'Login', 'error':False},context_instance=RequestContext(request))
 
+def log_out(request):
+	logout(request)
+	return redirect("/")		
+
+	
 @login_required(login_url="/login")
 def upload(request):
+	LinkFormSet = inlineformset_factory(Ebook,Link,fields=('download_link',),extra=1,can_delete=False)
 	if request.method == "POST":
 		form = UploadForm(request.POST)
+		link = LinkFormSet(request.POST)
 		if form.is_valid():
-			form.save()
+			ins=form.save()	
+			link=LinkFormSet(request.POST,instance=ins)
+			if link.is_valid():
+				link.save()
+			return redirect("/")
 	else: 
-		form = UploadForm()			
-	return render_to_response("upload2.html",{"form":form},context_instance=RequestContext(request))		
+		t = Ebook(uploader=request.user.profile)
+		form = UploadForm(instance=t)
+		link = LinkFormSet()
+	return render_to_response("upload.html",{'title':'Upload',"form":form,"link":link},context_instance=RequestContext(request))		
 			
-	
+@login_required(login_url="/login")	
 def create(request):
 	if request.method == "POST":
 		form = EbookForm(request.POST)
@@ -141,18 +179,18 @@ def create(request):
 			form.save()
 	else:
 		form = EbookForm()
-	return render_to_response("create.html",{"form":form},context_instance=RequestContext(request))
+	return render_to_response("create.html",{'title':'Upload',"form":form},context_instance=RequestContext(request))
+	
+
 
 def advanced_search(request):
 	searchResults = None
-	results_per_page = 5
+	results_per_page = 10
 	result = Ebook.objects.all()
 
 	if request.method == "POST":	
 		extraFieldForm = ExtraFieldsForm(request.POST)
-		
 		if extraFieldForm.is_valid():
-			
 			try:
 				searchKey = extraFieldForm.cleaned_data['title']
 				request.session['searchKey'] = searchKey
@@ -206,10 +244,10 @@ def advanced_search(request):
 	else:
 		extraFieldForm = ExtraFieldsForm()
 		
-	return render_to_response("advanced_search.html", {"searchResults": searchResults,"extraFieldForm": extraFieldForm,}, context_instance=RequestContext(request))
+	return render_to_response("advanced_search.html", {"title":"Advanced Search","results": searchResults,"extraFieldForm": extraFieldForm,}, context_instance=RequestContext(request))
 
 def search(request):
-	results_per_page = 4
+	results_per_page =10
 	try:
 		searchKey = request.GET['searchTxt']
 		request.session['searchKey'] = searchKey
@@ -219,22 +257,23 @@ def search(request):
 		page = request.GET['page']
 	except KeyError:
 		page = 1
-	
-	cate = Category.objects.filter(name__icontains = searchKey)
-	sub = Subject.objects.filter(name__icontains = searchKey)
+		
+	cate = Category.objects.filter(name__icontains = searchKey).annotate(count=Count("ebook"))
+	sub = Subject.objects.filter(name__icontains = searchKey).annotate(count=Count("ebook"))
 	eb = Ebook.objects.filter(name__icontains = searchKey)
 	result_list = list(chain(cate,sub,eb))
 	paginator = Paginator(result_list,results_per_page)
-	
 	try:
 		searchResults = paginator.page(page)
 	except PageNotAnInteger:
 		searchResults = paginator.page(1)
 	except EmptyPage:
 		searchResults = paginator.page(paginator.num_pages)
-	
-	return render_to_response('list.html', {"book_list": searchResults.object_list},context_instance=RequestContext(request))
+	return render_to_response('list.html', {"title":"Search","results": searchResults},context_instance=RequestContext(request))
 
 def view(request, name):
-#	book.html
-	pass
+	book=Ebook.objects.get(slug=name)
+	link=Link.objects.get(ebook=book)
+	return render_to_response('info.html', 
+	{'title': book.name,'book':book, 'link':link},
+	context_instance = RequestContext(request))

@@ -1,7 +1,26 @@
-<html>	
-  <head>
-    <title>Books API Example</title>
+{% extends "base.html" %}
+{% block content %}
 	<script src="http://code.jquery.com/jquery-latest.pack.js"></script>
+	<script type="text/javascript" src="/static/admin/js/core.js"></script>
+	<script type="text/javascript" src="/static/admin/js/getElementsBySelector.js"></script>
+	<script type="text/javascript" src="/static/admin/js/actions.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}scripts/SelectBox.js"></script>
+	<script type="text/javascript" src="/static/admin/js/SelectFilter2.js"></script>
+	<script type="text/javascript" src="{{STATIC_URL}}scripts/jsi18n.js"></script>
+	<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/style.css" >
+	<style>
+		#id_category, #id_level{
+			background: url('/static/images/default-bg.gif') bottom left repeat-x;
+			width:150px;
+		}	
+	</style>
+	<script type="text/javascript" src="/static/admin/js/urlify.js"></script>
+		<script type="text/javascript">
+			document.getElementById("id_name").onkeyup = function() {
+			var e = document.getElementById("id_slug");
+			if (!e._changed) { e.value = URLify(document.getElementById("id_name").value, 50); }
+			}
+		</script>
 		<script>
   function doAjax(url){
   var container = $('#id_description');
@@ -27,6 +46,7 @@
   function filterData(data){
 var len="<div class=\"sa\" dir=\"ltr\" id=\"synopsistext\">".length;
 var index=data.indexOf("<div class=\"sa\" dir=\"ltr\" id=\"synopsistext\">");
+if (index==-1) return "Can't find description";
 var temp=data.substring(index+len);
 var index2=temp.indexOf("<p>");
 var index3=temp.indexOf("\</p>");
@@ -36,7 +56,6 @@ return string;
 </script>
   </head>
   <body>
-    <div id="content"></div>
 	<script type="text/javascript">
 	var JSONObject;
 	function getCheckedId() {
@@ -52,42 +71,71 @@ return string;
 		document.getElementsByTagName("head")[0].appendChild(fileref)
 	}
 	function parseInfo() {
+		document.getElementById("id_description").value="Loading...";
 		var formObject = document.forms["result"];
 		var num = getCheckedId();
 		var input = JSONObject.items[num];
+		formObject.elements['id_isbn'].value = input.volumeInfo.industryIdentifiers[0].identifier;
 		var title = input.volumeInfo.title;
 		formObject.elements["id_name"].value = title;
+		formObject.elements["id_slug"].value = URLify(document.getElementById("id_name").value, 50);
 		var authors = input.volumeInfo.authors;
 		formObject.elements["id_authors"].value = authors;
 		var published_date = input.volumeInfo.publishedDate;
+		if (published_date.length == 4) published_date+="-01-01";
+		if (published_date.length == 7) published_date+="-01";
 		formObject.elements["id_published_date"].value = published_date;
-		doAjax(input.volumeInfo.infoLink);
-		var image_link = input.volumeInfo.imageLinks.thumbnail; 
+		var image_link = input.volumeInfo.imageLinks.smallThumbnail; 
 		formObject.elements["id_image_link"].value = image_link;
+		doAjax(input.volumeInfo.infoLink);
+		
 	}
 	function handleResponse(response) {
 	$("#list").height("350px");
 	JSONObject = response;
-	document.getElementById("list").innerHTML="";
+	document.getElementById("suggestion").innerHTML="";
+	document.getElementById("link").style.visibility="visible";
       for (var i = 0; i < response.items.length; i++) {
         var item = response.items[i];
-        document.getElementById("list").innerHTML += "<br>" + "<input type=\"radio\" name=\"books\" onclick=\"parseInfo()\" id=\""+i+"\"><img src=\""+item.volumeInfo.imageLinks.smallThumbnail+"\">"+item.volumeInfo.title+"</input>";
+        document.getElementById("suggestion").innerHTML += "<tr><td><input type=\"radio\" name=\"books\" onclick=\"parseInfo()\" id=\""+i+"\"></input></td><td><img src=\""+item.volumeInfo.imageLinks.smallThumbnail+"\"/></td><td>"+item.volumeInfo.title+"</td></tr>";
       }
 	}
 	</script>
-	<h3>Start typing a name in the input field below:</h3>
-	Book name: <input type="text" name="bookName" id="bookName"/>
-	<input type="button" value="Search" onclick="GetInfo(document.getElementById('bookName').value)"/>
-	<p>Suggestions:</p> 
-	<div id="list" style="overflow-y:scroll"></div>
-	<p></p>
+	<div id="content">
+	<div id="wrapper">
+	<h1>Upload book</h1>
+	<div id="content-main">
 	<form id="result" action="/upload" method="post"> 
-	<table>
-		{{form.as_table}}
-	</table>
-	<input type="submit" value="Upload" />
+			<fieldset class="module aligned">
+		<h1> Search for book information </h1>
+	<div class="form-row name">
+		<div>
+			<label for="" class="required">Book name:</label>
+			<input type="text" id="bookName" class="vTextField" name="" maxlength="100" />
+			<input type="button" value="Search" onclick="GetInfo(document.getElementById('bookName').value)"/>
+		</div>
+	</div><!-- end book name -->
+	<div class="form-row">
+		<div id="container">
+			<label for="" class="required">Suggestion:</label>
+			<div id="list" style="overflow-y:scroll">
+			<table id="suggestion" cellpadding="5px">
+			</table>
+			</div>
+			<a id="link" href="/create" style="font-size:15px;align:center;visibility:hidden">Not found? Create information yourself</a>
+		</div>
+	</div><!-- suggestion -->
+		<table>
+			{{form.as_table}}
+			{{link.as_table}}
+		</table>
+	</fieldset>
+			<div class="submit-row">
+				<input type="submit" value="Upload" class="default" name="" />
+				<input type="reset" value="Reset" class="default" name="" />
+			</div><!-- submit -->
 	</form>
-	<a href="/create">Create Book Information yourself</a>
-	<div id="container"></div>
-  </body>
-</html>
+		</div><!-- end content-main -->
+	</div><!-- end content -->
+</div>
+	{% endblock %}

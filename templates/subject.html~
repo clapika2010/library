@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="/static/css/subject.css">
+<div class="subject">
+	<div id="wrapperforsub">
+		<div class="forsubject">
+			<ul class="level1">
+				<li>Subject 1
+					<ul class="level2">
+						<li>Sub1</li>
+						<li>Sub2</li>
+						<li>Sub3</li>
+					</ul>
+				</li>
+				<li>Subject 2</li>
+				<li>Subject 3</li>
+				<li>Subject 4</li>
+				<li>Subject 5</li>
+				<li>Subject 6</li>
+			</ul>
+		</div>
+	</div><!-- end wrapper -->
+</div><!-- end subject -->
+
+{% endblock %}

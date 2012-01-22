@@ -1,0 +1,65 @@
+.subject {
+	width: 100%;
+	margin: 0px;
+	padding-top: 50px;
+	}
+	
+	#wrapperforsub {
+	margin: 0px auto 0px auto;
+	width: 960px;
+}
+	.subject .left {
+		float: left;
+		width: 740px;
+		margin-left: 10px;
+		padding: 0px;
+		}
+		
+.one-col {
+	width: 300px;
+	padding-left: 75px;
+	margin: 0px;
+	}
+	
+.show-list {
+	list-style-type: none;
+	list-style-position: outside;
+	border-top: 1px dotted #efefef;
+	width: 283px;
+	}
+
+.show-list li {
+	border-bottom: 1px dotted #efefef;
+	color: #666;
+	display: block;
+	padding: 12px 0 6px 25px;
+	background: url('/static/images/check.png') no-repeat 5px 7px;
+	}
+	
+.show-list a {
+	text-decoration: none;
+	color: #88BBC8;
+	font-size: 20px;
+	}
+	
+.forsubject {
+	margin-left: 200px;
+	}
+	
+.forsubject ul {
+	text-align: left;
+	list-style-image: none;
+	list-style-type: decimal;;
+	margin-left: 0px;
+	padding-top: 10px;
+	}
+	
+.forsubject li {
+	list-style-type: decimal;
+	margin-top: 20px;
+	}
+
+.forsubject .level1 ul, li{
+	font-size: 30px;
+	padding-top: 10px;
+	}

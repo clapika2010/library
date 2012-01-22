@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+
 <div id="wrapper">
 <div class="standard_error">
 	<h2 class="blockhead">Notice from Administrator</h2>
@@ -25,15 +26,13 @@
 				<input type="password" class="primary textbox" id="" name="" tabindex="1" />				
 			</div><!-- end blockrow -->
 			<div class="blockrow">
-				<label for="">
-					<input type="checkbox" name="" id="" value="" tabindex="1" />Remember?
-				</label>
+				<input type="checkbox" name="" id="" value="" tabindex="1" />Remember?
 			</div><!-- single check -->
 		</div><!-- end blockbody form -->
 		<div class="blockfoot actionbuttons">
 			<div class="group">
 				<input type="submit" class="" value="Login" tabindex="1" />
-				<input type="reset" class="" value="Cancle" tabindex="1" />
+				<input type="reset" class="" value="Cancel" tabindex="1" />
 			</div><!-- end group -->
 		</div><!-- button -->
 	</form>
